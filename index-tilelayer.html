@@ -194,7 +194,7 @@ var controlLayers = L.control.layers( null, null, {
 // .addTo(map); -- suffix displays baselayer by default
 // controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
 
-var mapboxstreets = new L.mapbox.tileLayer('mapbox.streets-satellite').addTo(map);
+var mapboxstreets = new L.mapbox.tileLayer('mapbox.streets-satellite').addTo(map); 
 controlLayers.addBaseLayer(mapboxstreets, 'Mapbox Streets');
 
 var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
