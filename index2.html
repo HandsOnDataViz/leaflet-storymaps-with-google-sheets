@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>Storymap Mapbox with TileLayer</title>
+<title>Storymap Mapbox</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
 <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
@@ -49,11 +49,9 @@ section.active {
     width: 15px;
     border-radius: 50%;
 }
-/* UNCLEAR what should go here */
+
 .bourne-marker {
-    background-image: url('data:image/png;base64,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');
-    background-size: 80px 80px;
-    border-radius:50%;
+    border-radius:10%;
     position: relative;
     z-index: 10;
 }
@@ -164,16 +162,16 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiamFja2RvdWdoZXJ0eSIsImEiOiJxMi11TGlzIn0.ydUTG
 
 // geojson coordinates are lng,lat NOT lat,lng
 var places = { type: 'FeatureCollection', features: [
-{ geometry: { type: "Point", coordinates: [-72.69, 41.76] },
+{ geometry: { type: "Point", coordinates: [-72.6782, 41.7676] },
   properties: { id: "cover", zoom: 13 }, type: 'Feature' },
-{ geometry: { type: "Point", coordinates: [-72.678, 41.767] },
-  properties: { id: "1847", zoom: 18 },type: 'Feature' },
+{ geometry: { type: "Point", coordinates: [-72.6782, 41.7676] },
+  properties: { id: "1847", zoom: 18 }, type: 'Feature' },
 { geometry: { type: "Point", coordinates: [-72.6848, 41.7677] },
-  properties: { id: "1869", zoom:18}, type: 'Feature' },
+  properties: { id: "1869", zoom: 18 }, type: 'Feature' },
 { geometry: { type: "Point", coordinates: [-72.6848, 41.7677] },
   properties: { id: "1911", zoom: 18 }, type: 'Feature' },
 { geometry: { type: "Point", coordinates: [-72.7010, 41.7652] },
-  properties: { id: "2011", zoom: 18  }, type: 'Feature' }
+  properties: { id: "2011", zoom: 18 }, type: 'Feature' }
 ]};
 
 var map = L.mapbox.map('map', 'mapbox.streets-satellite', {
@@ -194,7 +192,7 @@ var controlLayers = L.control.layers( null, null, {
 // .addTo(map); -- suffix displays baselayer by default
 // controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
 
-var mapboxstreets = new L.mapbox.tileLayer('mapbox.streets-satellite').addTo(map); 
+var mapboxstreets = new L.mapbox.tileLayer('mapbox.streets-satellite').addTo(map);
 controlLayers.addBaseLayer(mapboxstreets, 'Mapbox Streets');
 
 var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
