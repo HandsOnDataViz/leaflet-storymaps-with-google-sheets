@@ -4,8 +4,10 @@
 <meta charset=utf-8 />
 <title>Mapbox scroll storymap</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<!-- <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' /> -->
 <style>
   body { margin:0; padding:0; }
   #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -135,7 +137,7 @@ section.active {
 </article>
 
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiamFja2RvdWdoZXJ0eSIsImEiOiJxMi11TGlzIn0.ydUTGpMKcADi7fKPxy0GVA';
+// L.mapbox.accessToken = 'pk.eyJ1IjoiamFja2RvdWdoZXJ0eSIsImEiOiJxMi11TGlzIn0.ydUTGpMKcADi7fKPxy0GVA';
 // In this case, we just hardcode data into the file. This could be dynamic.
 // The important part about this data is that the 'id' property matches
 // the HTML above - that's how we figure out how to link up the
@@ -157,11 +159,13 @@ var places = { type: 'FeatureCollection', features: [
     properties: { id: "footer", zoom: 18 }, type: 'Feature' }
 ]};
 
-var map = L.mapbox.map('map', 'mapbox.streets-satellite', {
-    zoomControl: false
+var map = L.map('map', {
+  center: [41.5, -72.7], // [41.5, -72.7] for Connecticut; [41.76, -72.67] for Hartford county or city
+  zoom: 9, // zoom 9 for Connecticut; 10 for Hartford county, 12 for Hartford city
+  zoomControl: false
 });
 
-var placesLayer = L.mapbox.featureLayer(places)
+var placesLayer = new L.featureGroup(places)
     .addTo(map);
 
 // optional: add legend to toggle any baselayers and/or overlays
@@ -176,12 +180,9 @@ var controlLayers = L.control.layers( null, null, {
 // .addTo(map); -- suffix displays baselayer by default
 // controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
 
-var mapboxstreets = new L.mapbox.tileLayer('mapbox.streets-satellite').addTo(map);
-controlLayers.addBaseLayer(mapboxstreets, 'Mapbox Streets');
-
 var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-});
+}).addTo(map);
 controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
 
 // tileLayer.WMS as a baselayer - see http://leafletjs.com/reference.html#tilelayer-wms
@@ -216,12 +217,14 @@ function setId(newId) {
     placesLayer.eachLayer(function(layer) {
         if (layer.feature.properties.id === newId) {
             map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
-            layer.setIcon(L.mapbox.marker.icon({
-                'marker-color': '#a8f'
+            layer.setIcon(L.icon({
+                iconURL: 'icon_red_dot.png',
+                iconSize: [32, 32]
             }));
         } else {
-            layer.setIcon(L.mapbox.marker.icon({
-                'marker-color': '#404040'
+            layer.setIcon(L.icon({
+              iconURL: 'icon_black_dot.png',
+              iconSize: [32, 32]
             }));
         }
     });
