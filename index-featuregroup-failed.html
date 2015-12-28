@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Mapbox scroll storymap</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' /> -->
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+
+<div id='map'></div>
+
+
+<script>
+// L.mapbox.accessToken = 'pk.eyJ1IjoiamFja2RvdWdoZXJ0eSIsImEiOiJxMi11TGlzIn0.ydUTGpMKcADi7fKPxy0GVA';
+// In this case, we just hardcode data into the file. This could be dynamic.
+// The important part about this data is that the 'id' property matches
+// the HTML above - that's how we figure out how to link up the
+// map and the data.
+
+var map = L.map('map', {
+  zoomControl: false
+});
+
+var iconStyle = L.icon({
+  iconURL: "icon_red_dot",
+  iconSize: [32, 32]
+});
+
+// var marker1 = L.marker([41.6, -72.6]);
+// marker1.bindPopup("marker 1");
+// var marker2 = L.marker([41.5, -72.5]);
+// marker2.bindPopup("marker2");
+// var group = new L.featureGroup([marker1, marker2]).addTo(map);
+// map.fitBounds(group.getBounds());
+
+/ IMPORTANT -- these are lng,lat (not lat, lng)
+var places = { type: 'FeatureCollection', features: [
+{ geometry: { type: "Point", coordinates: [-72.6782, 41.7676] },
+  properties: { id: "cover", zoom: 13 }, type: 'Feature' },
+{ geometry: { type: "Point", coordinates: [-72.6782, 41.7676] },
+  properties: { id: "Ann", zoom: 18 }, type: 'Feature' },
+{ geometry: { type: "Point", coordinates: [-72.6848, 41.7677] },
+  properties: { id: "Hopkins", zoom: 18 }, type: 'Feature' },
+{ geometry: { type: "Point", coordinates: [-72.6848, 41.7677] },
+  properties: { id: "Hopkins2", zoom: 18 }, type: 'Feature' },
+{ geometry: { type: "Point", coordinates: [-72.7010, 41.7652] },
+  properties: { id: "Forest", zoom: 18 }, type: 'Feature' },
+{ geometry: { type: "Point", coordinates: [-72.7010, 41.7652] },
+    properties: { id: "footer", zoom: 18 }, type: 'Feature' }
+]};
+
+// load GeoJSON point data and clickable icons from local directory, using jQuery function (symbolized by $)
+$.getJSON("places.geojson", function (data){
+  var iconStyle = L.icon({
+    iconUrl: "src/hospital-18.png",
+    iconRetinaUrl: 'src/hospital-18@2x.png',
+    iconSize: [18, 18]
+  });
+  var geoJsonLayer = L.geoJson(data, {
+    pointToLayer: function( feature, latlng) {
+      var marker = L.marker(latlng,{icon: iconStyle});
+      marker.bindPopup(feature.properties.Location); // replace 'Location' with properties data label from your GeoJSON file
+      return marker;
+    }
+  }); // insert ".addTo(map)" to display layer by default
+  controlLayers.addOverlay(geoJsonLayer, 'Hospitals');
+});
+
+// optional: add legend to toggle any baselayers and/or overlays
+// global variable with (null, null) allows indiv layers to be added inside functions below
+var controlLayers = L.control.layers( null, null, {
+  position: "bottomright", // suggested: bottomright for CT (in Long Island Sound); topleft for Hartford region
+  collapsed: false // false = open by default
+}).addTo(map);
+
+/*BASELAYERS*/
+// use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
+// .addTo(map); -- suffix displays baselayer by default
+// controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
+
+var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+}).addTo(map);
+controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
+
+// tileLayer.WMS as a baselayer - see http://leafletjs.com/reference.html#tilelayer-wms
+// UConn MAGIC WMS settings - see http://geoserver.lib.uconn.edu:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
+var aerial1934 = new L.tileLayer.wms("http://geoserver.lib.uconn.edu:8080/geoserver/MAGIC/wms?", {
+  layers: 'MAGIC:1934 Connecticut Aerial Photography',
+  format: 'image/png',
+  version: '1.1.0',
+  transparent: true,
+  attribution: '1934 <a href="http://magic.library.uconn.edu">MAGIC UConn</a> and <a href="http://cslib.org">CSL</a>'
+});
+controlLayers.addBaseLayer(aerial1934, 'CT Aerial 1934');
+
+
+new L.Control.Zoom({position:'topright'}).addTo(map);
+
+</script>
+
+
+</body>
+</html>
