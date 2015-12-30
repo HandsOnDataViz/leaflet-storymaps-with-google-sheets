@@ -13,12 +13,13 @@ Mapbox storymap tutorial (Sherlock Holmes) (https://www.mapbox.com/mapbox.js/exa
 
 ## To Do
 - TESTING pure Leaflet version (beta 1.0) with map.flyTo
-- PROBLEMS: (list them)
+- KEY PROBLEM: current version does NOT properly make narrative sections 'active' when scrolling upward. See these console errors:
+  - Uncaught TypeError: Cannot read property 'lat' of null
+  - setActiveChapter	@	index.html:209
+  - window.onscroll	@	index.html:198
+- Is this caused by a mismatch when moving from MapboxGL (lng, lat) to Leaflet (lat,lng)?
+
 - test older IE browser support and older iPad browsers
-- define all points, refer to them in chapters, and display all at start and during storymap
-    if portable to pure Leaflet, try this:
-    L.marker([38.913184,-77.031952]).addTo(map);
-    L.marker([37.775408,-122.413682]).addTo(map);
-- evaluate pros and cons of one-color markers vs changing color when featured in narrative (compare with Mapbox storymap tutorial Sherlock Holmes)
-- determine if this model also can display polygons (as geojson objects?) for narratives about boundaries
-- automatically resize and center images to fit narrative div width (similar to pulse version)-
+- create more efficient way to code points in both marker display and sections/chapters
+- can this Leaflet model also display geojson polygons, in specific sections/chapters, to tell stories about boundaries?
+- add code automatically resize and center images to fit narrative div width (similar to pulse version)

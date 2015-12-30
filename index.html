@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>Leaflet Beta scroll storymap</title>
+<title>Leaflet Storymap</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
 <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
@@ -56,20 +56,18 @@ section:last-child {
 <div id='map'></div>
   <div id='narrative'>
     <section id='cover' class='cover active'>
-      <h2>Hartford Public High School sites (draft)</h2>
-      <p>leaflet-storymap-mapbox/index-leaflet.html</p>
-      <p>with pure Leaflet Beta</p>
-      <p>adapted from MapBoxGL by Jack Dougherty</p>
+      <h2 class='center'>Hartford Public High School<br> sites 1847-present</h2>
+      <h3 class='center'>TESTING using Leaflet Beta</h3>
       <p class='center'>Scroll down &#x25BE;</p>
     </section>
     <section id='Ann'>
-        <h3>Ann Street, 1847-1869?</h3>
+        <h3>Ann Street, 1847-1869</h3>
         <img src='HPHS1847small.jpg'>
         <small class='center'>Source credit to come</small>
         <p>Text about building on Ann Street. Text about building on Ann Street. Text about building on Ann Street. Text about building on Ann Street.</p>
     </section>
     <section id='Hopkins'>
-      <h3>Hopkins Street, 1869-1882?</h3>
+      <h3>Hopkins Street, 1869-1882</h3>
       <img src='HPHS1869small.jpg'>
       <p>Text about building on Hopkins Street.<br>
         Text about building on Hopkins Street.<br>
@@ -78,7 +76,7 @@ section:last-child {
         <small>Source credit to come</small></p>
     </section>
     <section id='Hopkins2'>
-      <h3>Hopkins Street rebuilt, 1882-1963?</h3>
+      <h3>Hopkins Street rebuilt, 1882-1963</h3>
       <img src='HPHS1911small.jpg'>
       <p>Text about building on Hopkins Street.<br>
         Text about building on Hopkins Street.<br>
@@ -87,7 +85,7 @@ section:last-child {
         <small>Source credit to come</small></p>
     </section>
     <section id='Forest'>
-      <h3>Forest Street, 1964?-present</h3>
+      <h3>Forest Street, 1964-present</h3>
       <img src='HPHS2011small.jpg'>
       <p>Text about building on Forest Street.<br>
         Text about building on Forest Street.<br>
@@ -105,7 +103,7 @@ section:last-child {
 // set up the map center and zoom level
 var map = L.map('map', {
   center: [41.76, -72.67], // [41.5, -72.7] for Connecticut; [41.76, -72.67] for Hartford county or city
-  zoom: 12, // zoom 9 for Connecticut; 10 for Hartford county, 12 for Hartford city
+  zoom: 13.5, // zoom 9 for Connecticut; 10 for Hartford county, 12 for Hartford city
   zoomControl: false // add later to reposition
 });
 
@@ -170,11 +168,8 @@ var chapters = {
         zoom: 13.5
     },
     'Ann': {
-        // duration: 3000,   // optional settings for MapboxGL
-        // bearing: 27,
-        // pitch: 20,
         center: [41.7676, -72.6782],
-        zoom: 17,
+        zoom: 17
     },
     'Hopkins': {
         center: [41.7677, -72.6848],
@@ -210,7 +205,7 @@ var activeChapterName = 'cover';  // must match initial chapter above
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
 
-    // map.flyTo(chapters[chapterName]);
+    // map.flyTo(chapters[chapterName]); // flyTo format changes from MapBoxGL to Leaflet beta
     map.flyTo(chapters, chapterName);
 
     document.getElementById(chapterName).setAttribute('class', 'active');
