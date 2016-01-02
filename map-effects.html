@@ -120,7 +120,7 @@ $(function() {
       // tap: false,
       // keyboard: false,
       // zoomControl: true
-    }).setView([35.8, 139], 8);
+    }).setView([41.76, -72.67], 10);
 
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -165,7 +165,7 @@ $(function() {
                if($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
                  $('.photo-container').css('opacity', 0.3);
                  $('div#container' + feature.properties['ID']).css('opacity', 1);
-                 map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0] + 0.015], 14);
+                 map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0] + 0.015], feature.properties['Zoom']);
                  iconHighlight(feature.properties['ID']);
                }
              });
