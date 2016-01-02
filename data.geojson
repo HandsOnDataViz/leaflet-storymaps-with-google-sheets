@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+
+"features": [
+{ "type": "Feature", "properties": { "ID": 1, "Title": "title 1", "Image": "001_600.jpg", "Description": "Description for image 1" }, "geometry": { "type": "Point", "coordinates": [ 139.099418527797127, 35.045966526596686 ] } },
+{ "type": "Feature", "properties": { "ID": 2, "Title": "title 2", "Image": "002_600.jpg", "Description": "Description for image 2" }, "geometry": { "type": "Point", "coordinates": [ 139.128332722106052, 34.968799054460014 ] } },
+{ "type": "Feature", "properties": { "ID": 3, "Title": "title 3", "Image": "003_600.jpg", "Description": "Description for image 3" }, "geometry": { "type": "Point", "coordinates": [ 139.140668222652607, 34.89205716549133 ] } },
+{ "type": "Feature", "properties": { "ID": 4, "Title": "title 4", "Image": "004_600.jpg", "Description": "Description for image 4" }, "geometry": { "type": "Point", "coordinates": [ 139.064850222037904, 34.935244526919632 ] } }
+]
+}
