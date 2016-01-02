@@ -4,6 +4,8 @@ TESTING Leaflet storymap with scroll-driven navigation for narrative and point m
 ## Demos
 http://jackdougherty.github.io/leaflet-storymap/index.html
 
+http://jackdougherty.github.io/leaflet-storymap/map-effects.html
+
 ## Credits
 Mapbox GL story map with scroll fly-to https://www.mapbox.com/mapbox-gl-js/example/scroll-fly-to/
 

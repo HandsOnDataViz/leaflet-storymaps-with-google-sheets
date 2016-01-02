@@ -1,0 +1,83 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ID": 1,
+        "Title": "Place 1",
+        "Lat": -105675.3497,
+        "Lng": 54684.0757,
+        "Image": "HPHS1847.jpg",
+        "Description": "About place 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.09941852779713,
+          35.045966526596686
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID": 2,
+        "Title": "Place 2",
+        "Lat": -114219.4555,
+        "Lng": 57375.7684,
+        "Image": "HPHS1869.jpg",
+        "Description": "About place 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.12833272210605,
+          34.968799054460014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID": 3,
+        "Title": "Place 3",
+        "Lat": -122725.3309,
+        "Lng": 58556.6989,
+        "Image": "HPHS1911.jpg",
+        "Description": "About place 3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.1406682226526,
+          34.89205716549133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID": 4,
+        "Title": "Place 4",
+        "Lat": -117976.2707,
+        "Lng": 51599.8623,
+        "Image": "HPHS2011.jpg",
+        "Description": "About place 4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.0648502220379,
+          34.93524452691963
+        ]
+      }
+    }
+  ]
+}
