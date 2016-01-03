@@ -14,7 +14,7 @@ Mapbox GL story map (Madrid airport runway) https://www.mapbox.com/bites/00045/
 Mapbox storymap tutorial (Sherlock Holmes) (https://www.mapbox.com/mapbox.js/example/v1.0.0/scroll-driven-navigation/
 
 ## To Do
-- TESTING pure Leaflet version (beta 1.0) with map.flyTo
+- TESTING Leaflet version (beta 1.x) with map.flyTo
 - KEY PROBLEM: current version does NOT properly make narrative sections 'active' when scrolling upward. See these console errors:
   - Uncaught TypeError: Cannot read property 'lat' of null
   - setActiveChapter	@	index.html:209
