@@ -26,8 +26,7 @@
           height:100%;
           overflow:auto;
           z-index: 99;
-          color: #fff;
-          background: rgba(0,0,0, 0.7); /* to apply opacity background only. */
+          background: rgba(254,254,254, 0.7); /* to apply opacity background only. */
         }
         /*GOAL: modify CSS for fully responsive design, so that each item in contents triggers map, regardless of screen size. See old @media CSS as strategy */
         #contents {
@@ -46,12 +45,13 @@
           color: #fff;
         }
         .image-container {
-          margin: 50px 0 0 0;
+          margin: 50px 0 0 0; /* Adjustable */
           text-align: left;
           height: 100%;
           opacity: 0.3;
         }
         .title-text {
+          font-weight: bold;
           text-align: center;
           margin: 10px;
         }
@@ -143,11 +143,11 @@ $(function() {
                src: 'img/' + feature.properties['Image'],
                width: '100%'
              });
-             // GOAL: make imageSource a clickable link from GeoJSON property
-             // Attempt below did not work, from http://gis.stackexchange.com/questions/165506/clickable-hyperlink-from-geojson-field-in-feature/165566#165566
-             // text: "Source: " + "<a href='" + feature.properties['ImageSource'] + "'>" + feature.properties['ImageSource'] + "</a>",
-             var imageSource = $('<p></p>', {
-               text: feature.properties['ImageSource'],
+             // GOAL: Add if/else statement: if ImageSource == "" then make blank; else do below
+             var imageSource = $('<a>', {
+               text: "Source: " + feature.properties['ImageSource'],
+               href: feature.properties['ImageSource'],
+               target: "_blank",
                class: 'source'
              });
              var description = $('<p></p>', {
