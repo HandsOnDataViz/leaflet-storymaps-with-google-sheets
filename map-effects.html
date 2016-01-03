@@ -5,75 +5,55 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
     <title>Jack Map Effects 100</title>
     <!-- <link rel="shortcut icon" href="../img/favicon.ico"> -->
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-    <!-- Leaflet 1.x beta not supported as of 2 Jan 2016 -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" />
     <style>
-        html, body, #map {
-          height: 600px;
-          font-family: "Avenir LT W01 35 Light", "Century Gothic", "Meiryo" Helvetica, Arial, sans-serif;
+        body {
+          padding:0;
+          margin:0;
+          font-family:"Helvetica", sans-serif;
         }
-        p.photo-text {
-          font-size: 9pt;
+        #map {
+          position:absolute;
+          left:0;
+          width:70%;
+          height:100%;
+          /*padding-left:15px;*/
+        }
+        #narrative {
+          position: absolute;
+          width:30%;
+          right: 0;
+          height:100%;
+          overflow:auto;
+          z-index: 99;
+          color: #fff;
+          background: rgba(0,0,0, 0.7); /* to apply opacity background only. */
         }
         #title {
           position: absolute;
           z-index: 999;
-          top: 15px;
-          right: 45px;
+          margin: 10px;
+          text-align: center;
           color: #fff;
         }
-        #bg {
-          position: absolute;
-          z-index: 99;
-          top: 0;
-          right: 0;
-          margin: 8px;
-          color: #fff;
-          background: rgba(0,0,0, 0.7); /* to apply opacity background only. */
-        }
-        @media (max-width: 600px) {
-          #map {
-            height: 300px;
-          }
-          #bg {
-            height: 300px;
-            width: 250px;
-          }
-          #photos {
-            margin-top: 70px;
-            height: 230px;
-          }
-          .photo-container {
-            height: 140%;
-          }
-        }
-        @media (min-width: 600px) {
-          #map {
-            height: 600px;
-          }
-          #bg {
-            height: 600px;
-            width: 450px;
-          }
-          #photos {
-            margin-top: 70px;
-            height: 530px;
-          }
-          .photo-container {
-            height: 90%;
-          }
-        }
-        #photos {
+        /*GOAL: modify CSS for fully responsive design, so that all chapters trigger map, regardless of screen size. See old @media CSS as strategy */
+        #chapters {
           width: 100%;
+          margin-top: 70px; /*Adjust to fix Title length */
+          height: 475px; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
           overflow-y: scroll;
         }
         .photo-container {
           margin: 50px 0 0 0;
-          text-align: center;
+          text-align: left;
+          height: 100%;
           opacity: 0.3;
         }
         .photo-text {
           margin: 20px;
+        }
+        p.photo-text {
+          /*font-size: 9pt;*/
         }
         /* CSS3 Transition for sizing svg icon and fade a photo container */
         div.svg-icon > svg > path {
@@ -93,20 +73,22 @@
   </head>
 
   <body>
-    <div id="title"><p>Scroll-Driven Map Navigation from Map-Effects</p></div>
-    <div id="bg">
-      <div id="photos"></div>
+    <div id="narrative">
+      <div id="title">Leaflet Storymap from Map-Effects, and what happens with longer text here<br>
+        <small>Scroll &#x25BE;</small>
+      </div>
+      <div id="chapters"></div>
     </div>
     <div id="map"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
 <script>
 $(function() {
   console.log('%c⚛ Map Effects 100: Hello geohacker! ⚛', 'font-family:monospace;font-size:16px;color:darkblue;');
   // Watch the postion for scrollable container
   var scrollPosition = 0;
-  $('div#photos').scroll(function() {
+  $('div#chapters').scroll(function() {
     scrollPosition = $(this).scrollTop();
   });
   // Leaflet Map Init
@@ -139,7 +121,7 @@ $(function() {
              });
              layer.setIcon(svgIcon);
              // Create photo content elements
-             var title = $('<h3></h3>', {
+             var title = $('<p></p>', {
                text: feature.properties['Title'],
                class: 'photo-text'
              });
@@ -156,16 +138,16 @@ $(function() {
                class: 'photo-container'
              });
              container.append(title).append(photo).append(description);
-             $('#photos').append(container);
+             $('#chapters').append(container);
              // Watch the current scroll postion for scroll-driven map navigation!
              var areaHeight = $('.photo-container').height() + 50;
              var areaTop = (feature.properties['ID']-1) * areaHeight - 50; // -50 is a minor adjustment
              var areaBottom = areaTop + areaHeight - 50; // -50 is a minor adjustment
-             $('div#photos').scroll(function() {
+             $('div#chapters').scroll(function() {
                if($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
                  $('.photo-container').css('opacity', 0.3);
                  $('div#container' + feature.properties['ID']).css('opacity', 1);
-                 map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0] + 0.015], feature.properties['Zoom']);
+                 map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['Zoom']);
                  iconHighlight(feature.properties['ID']);
                }
              });
@@ -182,7 +164,7 @@ $(function() {
      target.css({strokeWidth: '8', stroke: '#ff618f'});
      setTimeout(function() {
        target.css({strokeWidth: '4', stroke: '#a78194'});
-     }, 1000);
+     }, 500); // reduced from 1000 to 500 milliseconds
    }
    initMap();
  });
