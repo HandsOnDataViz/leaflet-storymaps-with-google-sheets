@@ -2,7 +2,7 @@
 "type": "FeatureCollection",
 "features": [
 { "type": "Feature", "properties": { "ID": 1, "Title": "title 1", "Zoom": 13, "Image": "HPHS1847_300.jpg", "Description": "Description for image 1" }, "geometry": { "type": "Point", "coordinates": [ -72.6782, 41.7676 ] } },
-{ "type": "Feature", "properties": { "ID": 2, "Title": "title 2", "Zoom": 14, "Image": "HPHS1869_300.jpg", "Description": "Description for image 2" }, "geometry": { "type": "Point", "coordinates": [ -72.6848, 41.7677 ] } },
+{ "type": "Feature", "properties": { "ID": 2, "Title": "title 2 which is longer than the other titles", "Zoom": 14, "Image": "HPHS1869_300.jpg", "Description": "Description for image 2, which is much, much, much longer than the other descriptions. So long, in fact, that it tests how this code displays longer text. And by longer, I mean much longer than the others. Really long. Like, several sentences. Really. Long." }, "geometry": { "type": "Point", "coordinates": [ -72.6848, 41.7677 ] } },
 { "type": "Feature", "properties": { "ID": 3, "Title": "title 3", "Zoom": 15, "Image": "HPHS1911_300.jpg", "Description": "Description for image 3" }, "geometry": { "type": "Point", "coordinates": [ -72.6848, 41.7677 ] } },
 { "type": "Feature", "properties": { "ID": 4, "Title": "title 4", "Zoom": 17, "Image": "HPHS2011_300.jpg", "Description": "Description for image 4" }, "geometry": { "type": "Point", "coordinates": [ -72.701, 41.7652 ] } }
 ]
