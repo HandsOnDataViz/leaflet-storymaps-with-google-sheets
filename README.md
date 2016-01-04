@@ -37,12 +37,11 @@ Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
 1. Optional: Test your map. If you downloaded the code to your computer, set up a local development environment (I recommend the free MAMP for Mac application (https://www.mamp.info), then open the index.html with your browser (I recommend Chrome). If you forked the code to your GitHub account, then use the GitHub Pages feature to host your code on the live web. (See more about GitHub Pages hosting in http://www.datavizbook.org/content/publish/host-html-code-ghpages/tutorial.html).
 
 ## To Do
-- Reorganize from one HTML file into separate JS and CSS files
 - Test IE 9+ browser.
 - Modify CSS to create fully responsive design, and ensure that each item in narrative becomes active (especially the last item), regardless of screen size. See original @media CSS for one type of responsive strategy.
 - Experiment with these settings/comments: "-50 is a minor adjustment"
 - Add code automatically resize and center images to fit narrative div width (similar to pulse version)
-- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID
+- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID. Consider L.letterIcon (http://mapbbcode.org/leaflet.html) or similar.
 - Add code to make points clickable to auto-scroll to relevant narrative chapter, as happens in http://jackdougherty.github.io/leaflet-stories.
 - Add if/else statement: if ImageSource == "" then make blank; else do below
 - Add code to display different tileLayers (e.g. MAGIC 1934 Aerial, etc.) or overlays for different chapters, as instructed in geoJSON file.
