@@ -1,27 +1,50 @@
 # leaflet-storymap
-TESTING Leaflet storymap with scroll-driven navigation for narrative and point markers
+Leaflet storymap with scroll-driven navigation for narrative and point markers
 
-## Demos
+## Demo
 http://jackdougherty.github.io/leaflet-storymap/index.html
 
-http://jackdougherty.github.io/leaflet-storymap/map-effects.html
+### Benefits
+- Clean scroll-driven navigation
+- Users can pan and zoom map independently from scroll navigation to explore further
+- Point markers and narration from local GeoJSON; images from local folder
+- Initial map displays all markers
+- Uses only Leaflet and JQuery free libraries
 
 ## Credits
-Mapbox GL story map with scroll fly-to https://www.mapbox.com/mapbox-gl-js/example/scroll-fly-to/
+Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
 
-Mapbox GL story map (Madrid airport runway) https://www.mapbox.com/bites/00045/
+## Compare with
+- http://jackdougherty.github.io/leaflet-stories/index.html
+- http://jackdougherty.github.io/mapbox-storymap/index.html
 
-Mapbox storymap tutorial (Sherlock Holmes) (https://www.mapbox.com/mapbox.js/example/v1.0.0/scroll-driven-navigation/
+## Set up your title, point markers, narrative, and images
+
+1. Download a copy of this code, or fork a copy to your GitHub account (requires free sign-up).
+1. To modify the title in the index.HTML file, use a text editor tool. If you downloaded the code, I recommend this free editor: https://atom.io/. If you forked the code on GitHub, use the built-in editor in the browser. Optional: download the free GitHub Desktop tool to easily migrate your file changes from GitHub to local computer, and vice versa.
+1. Create images (currently must be 300px wide), organize file names, and upload into the "img" subfolder.
+1. To create the point markers, narrative text, and links to your images, use a geoJSON creation tool. I recommend this free web app: http://geojson.io)
+- In geojson.io, use "search" icon to find your general location, and click on marker tool to draw points on your map, in the order of your chapters. Note that GeoJSON uses longitude/latitude format, NOT the latitude/longitude format used in Leaflet.)
+- In geojson.io, click the Table tab, and create columns named:
+  - ID (numbers 1, 2, 3. . )
+  - Chapter (header for each section of your narrative)
+  - Zoom (your desired zoom level for each chapter)
+  - Image (link to each image in your local "img" subfolder; currently must be 300px wide and roughly similar height)
+  - ImageSource (web link to the image source)
+  - Description (text for the chapter)
+
+1. In geojson.io, save your file as "data.geojson" and upload to replace existing file in local folder, OR simply copy and paste the content into the existing data.geojson file.
+1. Optional: Test your map. If you downloaded the code to your computer, set up a local development environment (I recommend the free MAMP for Mac application (https://www.mamp.info), then open the index.html with your browser (I recommend Chrome). If you forked the code to your GitHub account, then use the GitHub Pages feature to host your code on the live web. (**SEE MY OTHER NOTES**).
 
 ## To Do
-- TESTING Leaflet version (beta 1.x) with map.flyTo
-- KEY PROBLEM: current version does NOT properly make narrative sections 'active' when scrolling upward. See these console errors:
-  - Uncaught TypeError: Cannot read property 'lat' of null
-  - setActiveChapter	@	index.html:209
-  - window.onscroll	@	index.html:198
-- Is this caused by a mismatch when moving from MapboxGL (lng, lat) to Leaflet (lat,lng)?
-
-- test older IE browser support and older iPad browsers
-- create more efficient way to code points in both marker display and sections/chapters
-- can this Leaflet model also display geojson polygons, in specific sections/chapters, to tell stories about boundaries?
-- add code automatically resize and center images to fit narrative div width (similar to pulse version)
+- Reorganize from one HTML file into separate files
+- Test older IE browser support and older iPad browsers
+- Modify CSS to create fully responsive design, and ensure that each item in narrative becomes active (especially the last item), regardless of screen size. See original @media CSS for one type of responsive strategy.
+- Experiment with these settings/comments: "-50 is a minor adjustment"
+- Add code automatically resize and center images to fit narrative div width (similar to pulse version)
+- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID
+- Add code to make points clickable to auto-scroll to relevant narrative chapter, as happens in http://jackdougherty.github.io/leaflet-stories.
+- Add if/else statement: if ImageSource == "" then make blank; else do below
+- Use smoother "flyTo" Leaflet 1.x to transition between points in way that shows distance and context.
+- Add code to display different tileLayers (e.g. MAGIC 1934 Aerial, etc.) or overlays for different chapters, as instructed in geoJSON file.
+- Create leaflet-storymap-polygons version to tell stories about map boundaries (rather than points). Try creating each boundary chapter as its own geojson file (data1.js, data2.js, etc.), add each when chapter loads (and remove when scrolling backwards), and use fitBounds for each chapter geojson (or a filled-in geojson to draw attention to an area).

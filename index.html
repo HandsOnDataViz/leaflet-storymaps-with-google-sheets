@@ -1,228 +1,192 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset=utf-8 />
-<title>Leaflet Storymap</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
-<script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script> -->
-<style>
-body {
-  margin:0;
-  padding:0;
-}
-#map {
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:100%;
-}
-</style>
-</head>
-<body>
-
-<style>
-/*2nd styling for map*/
-#map {
-  position: fixed;
-  width: 70%;
-}
-#narrative {
-    width: 30%;
-    margin-left: 70%;
-    font-family: sans-serif;
-    overflow-y: scroll;
-    background-color: #fafafa;
-}
-.center {
-  display:block;
-  text-align:center;
-  }
-section {
-    padding:  10px 10px 0px 10px;
-    /*line-height: 25px;*/
-    border-bottom: 1px solid #ddd;
-    opacity: 0.25;
-    font-size: 13px;
-}
-section.active {
-    opacity: 1;
-}
-section:last-child {
-    border-bottom: none;
-    margin-bottom: 400px;
-}
-</style>
-<div id='map'></div>
-  <div id='narrative'>
-    <section id='cover' class='cover active'>
-      <h2 class='center'>Hartford Public High School<br> sites 1847-present</h2>
-      <h3 class='center'>TESTING using Leaflet Beta</h3>
-      <p class='center'>Scroll down &#x25BE;</p>
-    </section>
-    <section id='Ann'>
-        <h3>Ann Street, 1847-1869</h3>
-        <img src='img/HPHS1847_300.jpg'>
-        <small class='center'>Source credit to come</small>
-        <p>Text about building on Ann Street. Text about building on Ann Street. Text about building on Ann Street. Text about building on Ann Street.</p>
-    </section>
-    <section id='Hopkins'>
-      <h3>Hopkins Street, 1869-1882</h3>
-      <img src='img/HPHS1869_300.jpg'>
-      <p>Text about building on Hopkins Street.<br>
-        Text about building on Hopkins Street.<br>
-        Text about building on Hopkins Street.<br>
-        Text about building on Hopkins Street.<br>
-        <small>Source credit to come</small></p>
-    </section>
-    <section id='Hopkins2'>
-      <h3>Hopkins Street rebuilt, 1882-1963</h3>
-      <img src='img/HPHS1911_300.jpg'>
-      <p>Text about building on Hopkins Street.<br>
-        Text about building on Hopkins Street.<br>
-        Text about building on Hopkins Street.<br>
-        Text about building on Hopkins Street.<br>
-        <small>Source credit to come</small></p>
-    </section>
-    <section id='Forest'>
-      <h3>Forest Street, 1964-present</h3>
-      <img src='img/HPHS2011_300.jpg'>
-      <p>Text about building on Forest Street.<br>
-        Text about building on Forest Street.<br>
-        Text about building on Forest Street.<br>
-        Text about building on Forest Street.<br>
-        Text about building on Forest Street.<br>
-        <small>Source credit to come</small></p>
-    </section>
-    <section id='footer'>
-      <p>Source text in the footer to come.</p>
-    </section>
-  </div>
-<script>
-
-// set up the map center and zoom level
-var map = L.map('map', {
-  center: [41.76, -72.67], // [41.5, -72.7] for Connecticut; [41.76, -72.67] for Hartford county or city
-  zoom: 13, // zoom 9 for Connecticut; 10 for Hartford county, 12 for Hartford city
-  zoomControl: false // add later to reposition
-});
-
-// optional : customize link to view source code; add your own GitHub repository
-// map.attributionControl
-// .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
-
-// optional: add legend to toggle any baselayers and/or overlays
-// global variable with (null, null) allows indiv layers to be added inside functions below
-var controlLayers = L.control.layers( null, null, {
-  position: "bottomright", // suggested: bottomright for CT (in Long Island Sound); topleft for Hartford region
-  collapsed: false // false = open by default
-}).addTo(map);
-
-// optional: reposition zoom control other than default topleft
-L.control.zoom({position: "topright"}).addTo(map);
-
-/* BASELAYERS */
-// use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
-// .addTo(map); -- suffix displays baselayer by default
-// controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
-var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-}).addTo(map); //this displays layer by default
-controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
-
-// Esri satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
-var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-});
-controlLayers.addBaseLayer(Esri_WorldImagery, 'Esri World Imagery');
-
-// MapQuest satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
-var MapQuestOpen_Aerial = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-  type: 'sat',
-  ext: 'jpg',
-  attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
-  subdomains: '1234'
-});
-controlLayers.addBaseLayer(MapQuestOpen_Aerial, 'MapQuest Open Aerial');
-
-// tileLayer.WMS as a baselayer - see http://leafletjs.com/reference.html#tilelayer-wms
-// UConn MAGIC WMS settings - see http://geoserver.lib.uconn.edu:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
-var aerial1934 = new L.tileLayer.wms("http://geoserver.lib.uconn.edu:8080/geoserver/MAGIC/wms?", {
-  layers: 'MAGIC:1934 Connecticut Aerial Photography',
-  format: 'image/png',
-  version: '1.1.0',
-  transparent: true,
-  attribution: '1934 <a href="http://magic.library.uconn.edu">MAGIC UConn</a> and <a href="http://cslib.org">CSL</a>'
-});
-controlLayers.addBaseLayer(aerial1934, 'CT Aerial 1934');
-
-/* POINT OVERLAYS */
-L.marker([41.7676, -72.6782]).addTo(map); //Ann
-L.marker([41.7677, -72.6848]).addTo(map); //Hopkins
-L.marker([41.7652, -72.7010]).addTo(map); //Forest
-
-var chapters = {
-    // make cover settings identical to those above
-    'cover': {
-        center: [41.7676, -72.6782],
-        zoom: 13
-    },
-    'Ann': {
-        center: [41.7676, -72.6782],
-        zoom: 17
-    },
-    'Hopkins': {
-        center: [41.7677, -72.6848],
-        zoom: 17
-    },
-    'Hopkins2': {
-        center: [41.7677, -72.6848],
-        zoom: 17
-    },
-    'Forest': {
-        center: [41.7652, -72.7010],
-        zoom: 17
-    },
-    'footer': {
-        center: [41.7652, -72.7010],
-        zoom: 13
-    }
-};
-
-// On every scroll event, check which element is on screen
-window.onscroll = function() {
-    var chapterNames = Object.keys(chapters);
-    for (var i = 0; i < chapterNames.length; i++) {
-        var chapterName = chapterNames[i];
-        if (isElementOnScreen(chapterName)) {
-            setActiveChapter(chapterName);
-            break;
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Storymap from Map-Effects</title>
+    <!-- <link rel="shortcut icon" href="../img/favicon.ico"> -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" />
+    <style>
+        body {
+          padding:0;
+          margin:0;
+          font-family:"Helvetica", sans-serif;
         }
-    }
-};
+        #map {
+          position:absolute;
+          left:0;
+          width:70%;
+          height:100%;
+          /*padding-left:15px;*/
+        }
+        #narration {
+          position: absolute;
+          width:30%;
+          right: 0;
+          height:100%;
+          overflow:auto;
+          z-index: 99;
+          background: rgba(254,254,254, 0.7); /* to apply opacity background only. */
+        }
+        /*TO DO: Modify CSS for fully responsive design, so that each item in contents triggers map, regardless of screen size. */
+        #contents {
+          width: 100%;
+          margin-top: 0px; /*Adjust if Title header needs more space */
+          height: 500px; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
+          overflow-y: scroll;
+        }
+        #chapter {
+          position: absolute;
+          z-index: 999;
+          margin: 10px;
+          display: block;
+          text-align: center;
+          color: #fff;
+        }
+        .image-container {
+          margin: 50px 0 0 0; /* Adjustable */
+          text-align: left;
+          height: 100%;
+          opacity: 0.3;
+        }
+        .title-text {
+          font-weight: bold;
+          text-align: center;
+          margin: 10px;
+        }
+        .chapter-header {
+          display: block;
+          text-align: center;
+        }
+        .source {
+          font-size: 9pt;
+          margin: 20px;
+        }
+        .description {
+          margin: 20px;
+        }
+        p.description {
+          font-size: 11pt;
+        }
+    </style>
+  </head>
 
-var activeChapterName = 'cover';  // must match initial chapter above
-function setActiveChapter(chapterName) {
-    if (chapterName === activeChapterName) return;
+  <body>
+    <div id="narration">
+      <div id="title" class="title-text">Hartford Public High School locations, 1847-present<br>
+        <small>Scroll &#x25BE;</small>
+      </div>
+      <div id="contents"></div>
+    </div>
+    <div id="map"></div>
 
-    // map.flyTo(chapters[chapterName]); // flyTo format changes from MapBoxGL to Leaflet beta
-    map.flyTo(chapters, chapterName);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+<script>
+$(function() {
+  // Watch for scrollable container
+  var scrollPosition = 0;
+  $('div#contents').scroll(function() {
+    scrollPosition = $(this).scrollTop();
+  });
+  // Leaflet Map Init
+  function initMap() {
+    var map = L.map('map', {
+      zoomControl: false
+    }).setView([0, 0], 5); // initial map automatically fits bounds of all markers
 
-    document.getElementById(chapterName).setAttribute('class', 'active');
-    document.getElementById(activeChapterName).setAttribute('class', '');
+    // optional : customize link to view source code; add your own GitHub repository
+    map.attributionControl
+    .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-storymap">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
-    activeChapterName = chapterName;
-}
+    // optional: add legend to toggle any baselayers and/or overlays
+    // global variable with (null, null) allows indiv layers to be added inside functions below
+    var controlLayers = L.control.layers( null, null, {
+      position: "bottomright",
+      collapsed: false // false = open by default
+    }).addTo(map);
 
-function isElementOnScreen(id) {
-    var element = document.getElementById(id);
-    var bounds = element.getBoundingClientRect();
-    return bounds.top < window.innerHeight && bounds.bottom > 0;
-}
+    // optional: reposition zoom control other than default topleft
+    L.control.zoom({position: "topright"}).addTo(map);
 
-</script>
+    /* BASELAYERS */
+    // use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
+    // .addTo(map); -- suffix displays baselayer by default
+    // controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
+    var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    }).addTo(map); //this displays layer by default
+    controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
 
-</body>
-</html>
+    // Esri satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
+    var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });
+    controlLayers.addBaseLayer(Esri_WorldImagery, 'Esri Satellite');
+
+    // tileLayer.WMS as a baselayer - see http://leafletjs.com/reference.html#tilelayer-wms
+    // UConn MAGIC WMS settings - see http://geoserver.lib.uconn.edu:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
+    var aerial1934 = new L.tileLayer.wms("http://geoserver.lib.uconn.edu:8080/geoserver/MAGIC/wms?", {
+      layers: 'MAGIC:1934 Connecticut Aerial Photography',
+      format: 'image/png',
+      version: '1.1.0',
+      transparent: true,
+      attribution: '1934 <a href="http://magic.library.uconn.edu">MAGIC UConn</a> and <a href="http://cslib.org">CSL</a>'
+    });
+    controlLayers.addBaseLayer(aerial1934, 'CT Aerial 1934');
+
+    // *GET THE GEOJSON
+     $.getJSON('data.geojson', function(data) {
+       var geojson = L.geoJson(data, {
+         onEachFeature: function (feature, layer) {
+           (function(layer, properties) {
+             // Create Contents elements
+             var chapter = $('<p></p>', {
+               text: feature.properties['Chapter'],
+               class: 'chapter-header'
+             });
+             var image = $('<img>', {
+               src: 'img/' + feature.properties['Image'],
+               width: '100%'
+             });
+             // TO DO: Add if/else statement: if ImageSource == "" then make blank; else do below
+             var imageSource = $('<a>', {
+               text: "Source: " + feature.properties['ImageSource'],
+               href: feature.properties['ImageSource'],
+               target: "_blank",
+               class: 'source'
+             });
+             var description = $('<p></p>', {
+               text: feature.properties['Description'],
+               class: 'description'
+             });
+             var container = $('<div></div>', {
+               id: 'container' + feature.properties['ID'],
+               class: 'image-container'
+             });
+             container.append(chapter).append(image).append(imageSource).append(description);
+             $('#contents').append(container);
+             // Watch the current scroll postion for scroll-driven map navigation!
+             var areaHeight = $('.image-container').height() + 50;
+             var areaTop = (feature.properties['ID']-1) * areaHeight - 50; // -50 is a minor adjustment
+             var areaBottom = areaTop + areaHeight - 50; // -50 is a minor adjustment
+             $('div#contents').scroll(function() {
+               if($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
+                 $('.image-container').css('opacity', 0.3);
+                 $('div#container' + feature.properties['ID']).css('opacity', 1);
+                 map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['Zoom']);
+               }
+             });
+           })(layer, feature.properties);
+         }
+       });
+       $('div#container1').css('opacity', 1);
+       map.fitBounds(geojson.getBounds());
+       geojson.addTo(map);
+     });
+   }
+   initMap();
+ });
+ </script>
+   </body>
+ </html>
