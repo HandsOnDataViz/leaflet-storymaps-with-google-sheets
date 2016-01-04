@@ -1,0 +1,61 @@
+body {
+  padding:0;
+  margin:0;
+  font-family:"Helvetica", sans-serif;
+}
+#map {
+  position:absolute;
+  left:0;
+  width:70%;
+  height:100%;
+  /*padding-left:15px;*/
+}
+#narration {
+  position: absolute;
+  width:30%;
+  right: 0;
+  height:100%;
+  overflow:auto;
+  z-index: 99;
+  background: rgba(254,254,254, 0.7); /* to apply opacity background only. */
+}
+/*TO DO: Modify CSS for fully responsive design, so that each item in contents triggers map, regardless of screen size. */
+#contents {
+  width: 100%;
+  margin-top: 0px; /*Adjust if Title header needs more space */
+  height: 500px; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
+  overflow-y: scroll;
+}
+#chapter {
+  position: absolute;
+  z-index: 999;
+  margin: 10px;
+  display: block;
+  text-align: center;
+  color: #fff;
+}
+.image-container {
+  margin: 50px 0 0 0; /* Adjustable */
+  text-align: left;
+  height: 100%;
+  opacity: 0.3;
+}
+.title-text {
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}
+.chapter-header {
+  display: block;
+  text-align: center;
+}
+.source {
+  font-size: 9pt;
+  margin: 20px;
+}
+.description {
+  margin: 20px;
+}
+p.description {
+  font-size: 11pt;
+}
