@@ -41,7 +41,7 @@ Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
 - Modify CSS to create fully responsive design, and ensure that each item in narrative becomes active (especially the last item), regardless of screen size. See original @media CSS for one type of responsive strategy.
 - Experiment with these settings/comments: "-50 is a minor adjustment"
 - Add code automatically resize and center images to fit narrative div width (similar to pulse version)
-- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID. Consider L.letterIcon (http://mapbbcode.org/leaflet.html) or similar.
+- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID. Consider Font-Awesome-markers numeric (http://stackoverflow.com/questions/22622393/leaflet-awesome-markers-adding-numbers, see https://github.com/lvoogdt/Leaflet.awesome-markers/tree/6dd41539428caa28f75b30fa2cd8dcba2c202a86/dist) or L.letterIcon (http://mapbbcode.org/leaflet.html) or similar.
 - Add code to make points clickable to auto-scroll to relevant narrative chapter, as happens in http://jackdougherty.github.io/leaflet-stories.
 - Add if/else statement: if ImageSource == "" then make blank; else do below
 - Add code to display different tileLayers (e.g. MAGIC 1934 Aerial, etc.) or overlays for different chapters, as instructed in geoJSON file.
