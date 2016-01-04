@@ -5,11 +5,11 @@ Leaflet storymap with scroll-driven navigation for narrative and point markers
 http://jackdougherty.github.io/leaflet-storymap/index.html
 
 ### Benefits
-- Clean scroll-driven navigation
-- Users can pan and zoom map independently from scroll navigation to explore further
-- Point markers and narration from local GeoJSON; images from local folder
-- Initial map displays all markers
-- Uses only Leaflet and JQuery free libraries
+- Clean scroll-driven navigation, which allows users to pan and zoom the map independently of the narration, for further exploration. Initial map displays all markers.
+- Images are stored in a local subfolder. Coordinate points, narration text, image links, and zoom levels for each chapter are stored in a local geoJSON file, which makes it easier to create new storymaps with minimal coding.
+- Responsive design that automatically resizes for all devices (but coding needs to be improved.)
+- Works in modern browsers (Chrome, Firefox, IE, Safari, including 1st generation iPad). Not supported in IE 8 or lower.
+- Uses only free and open-source Leaflet.js and jQuery libraries.
 
 ## Credits
 Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
@@ -34,17 +34,16 @@ Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
   - Description (text for the chapter)
 
 1. In geojson.io, save your file as "data.geojson" and upload to replace existing file in local folder, OR simply copy and paste the content into the existing data.geojson file.
-1. Optional: Test your map. If you downloaded the code to your computer, set up a local development environment (I recommend the free MAMP for Mac application (https://www.mamp.info), then open the index.html with your browser (I recommend Chrome). If you forked the code to your GitHub account, then use the GitHub Pages feature to host your code on the live web. (**SEE MY OTHER NOTES**).
+1. Optional: Test your map. If you downloaded the code to your computer, set up a local development environment (I recommend the free MAMP for Mac application (https://www.mamp.info), then open the index.html with your browser (I recommend Chrome). If you forked the code to your GitHub account, then use the GitHub Pages feature to host your code on the live web. (See more about GitHub Pages hosting in http://www.datavizbook.org/content/publish/host-html-code-ghpages/tutorial.html).
 
 ## To Do
-- Reorganize from one HTML file into separate files
-- Test older IE browser support and older iPad browsers
+- Reorganize from one HTML file into separate JS and CSS files
+- Test IE 9+ browser.
 - Modify CSS to create fully responsive design, and ensure that each item in narrative becomes active (especially the last item), regardless of screen size. See original @media CSS for one type of responsive strategy.
 - Experiment with these settings/comments: "-50 is a minor adjustment"
 - Add code automatically resize and center images to fit narrative div width (similar to pulse version)
 - Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID
 - Add code to make points clickable to auto-scroll to relevant narrative chapter, as happens in http://jackdougherty.github.io/leaflet-stories.
 - Add if/else statement: if ImageSource == "" then make blank; else do below
-- Use smoother "flyTo" Leaflet 1.x to transition between points in way that shows distance and context.
 - Add code to display different tileLayers (e.g. MAGIC 1934 Aerial, etc.) or overlays for different chapters, as instructed in geoJSON file.
 - Create leaflet-storymap-polygons version to tell stories about map boundaries (rather than points). Try creating each boundary chapter as its own geojson file (data1.js, data2.js, etc.), add each when chapter loads (and remove when scrolling backwards), and use fitBounds for each chapter geojson (or a filled-in geojson to draw attention to an area).

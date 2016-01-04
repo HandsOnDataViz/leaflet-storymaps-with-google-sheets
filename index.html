@@ -174,7 +174,7 @@ $(function() {
                if($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
                  $('.image-container').css('opacity', 0.3);
                  $('div#container' + feature.properties['ID']).css('opacity', 1);
-                 map.setView([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['Zoom']);
+                 map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['Zoom']);
                }
              });
            })(layer, feature.properties);
