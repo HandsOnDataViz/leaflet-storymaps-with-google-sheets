@@ -56,39 +56,38 @@ function initMap() {
         (function(layer, properties) {
           // Create Contents elements
           var chapter = $('<p></p>', {
-            text: feature.properties['Chapter'],
+            text: feature.properties['chapter'],
             class: 'chapter-header'
           });
           var image = $('<img>', {
-            src: 'img/' + feature.properties['Image'],
+            src: feature.properties['image'],
             width: '100%'
           });
-          // TO DO: Add if/else statement: if ImageSource == "" then make blank; else do below
-          var imageSource = $('<a>', {
-            text: "Source: " + feature.properties['ImageSource'],
-            href: feature.properties['ImageSource'],
+          var source = $('<a>', {
+            text: feature.properties['source-credit'],
+            href: feature.properties['source-link'],
             target: "_blank",
             class: 'source'
           });
           var description = $('<p></p>', {
-            text: feature.properties['Description'],
+            text: feature.properties['description'],
             class: 'description'
           });
           var container = $('<div></div>', {
-            id: 'container' + feature.properties['ID'],
+            id: 'container' + feature.properties['id'],
             class: 'image-container'
           });
-          container.append(chapter).append(image).append(imageSource).append(description);
+          container.append(chapter).append(image).append(source).append(description);
           $('#contents').append(container);
           // Watch the current scroll postion for scroll-driven map navigation!
           var areaHeight = $('.image-container').height() + 50;
-          var areaTop = (feature.properties['ID']-1) * areaHeight - 50; // -50 is a minor adjustment
+          var areaTop = (feature.properties['id']-1) * areaHeight - 50; // -50 is a minor adjustment
           var areaBottom = areaTop + areaHeight - 50; // -50 is a minor adjustment
           $('div#contents').scroll(function() {
             if($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
               $('.image-container').css('opacity', 0.3);
-              $('div#container' + feature.properties['ID']).css('opacity', 1);
-              map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['Zoom']);
+              $('div#container' + feature.properties['id']).css('opacity', 1);
+              map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['zoom']);
             }
           });
         })(layer, feature.properties);
