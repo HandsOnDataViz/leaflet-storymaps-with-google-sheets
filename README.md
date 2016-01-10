@@ -21,7 +21,7 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - http://jackdougherty.github.io/mapbox-storymap/pulse.html
 - http://jackdougherty.github.io/mapbox-storymap/markers.html
 
-## Create your own storymap 
+## Create your own storymap
 
 1. Download a copy of this code, or fork a copy to your GitHub account (requires free sign-up).
 1. Title: Edit the title in the index.HTML file, using a text editor. If you downloaded the code, try this free editor: https://atom.io/. If you forked the code on GitHub, view the master branch on the browser and click the editor button (pencil), then commit (save changes). Recommended: Try the free GitHub Desktop tool (Mac or Windows, https://desktop.github.com/) to easily move files and commit changes from online GitHub to local computer, and vice versa.
@@ -53,7 +53,10 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - Find a way to make the div chapter length variable, so that the height adjusts automatically for tall images and long descriptions, without adversely lengthening blank space for other chapters.
 - Make source-link optional by inserting an if/else statement for source-link=""
 - Is there a way to embed clickable hyperlinks inside description field of GeoJSON file?
-- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID. Consider Font-Awesome-markers numeric (http://stackoverflow.com/questions/22622393/leaflet-awesome-markers-adding-numbers, see https://github.com/lvoogdt/Leaflet.awesome-markers/tree/6dd41539428caa28f75b30fa2cd8dcba2c202a86/dist) or L.letterIcon (http://mapbbcode.org/leaflet.html) or similar.
+- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID.
+  - Try this: http://giscollective.org/tutorials/quick-tips/numbered-icons-in-leaflet/
+  - I could not make this work: Font-Awesome-markers numeric (http://stackoverflow.com/questions/22622393/leaflet-awesome-markers-adding-numbers) using ( https://github.com/lvoogdt/Leaflet.awesome-markers/tree/6dd41539428caa28f75b30fa2cd8dcba2c202a86/dist) 
+  - or L.letterIcon (http://mapbbcode.org/leaflet.html)
 - Add code to make points clickable to auto-scroll to relevant narrative chapter. See http://muxlab.github.io/map-effects-100/Leaflet/12_map-driven-scroll-navigation.html OR http://jackdougherty.github.io/leaflet-stories
 - Aspirational goal: Add code to display different tileLayers (e.g. MAGIC 1934 Aerial, etc.) or overlays for different chapters, based on  instructed in GeoJSON file.
 - Create leaflet-storymap-polygons version to tell stories about map boundaries (rather than points). Try creating each boundary chapter as its own geojson file (data1.js, data2.js, etc.), add each when chapter loads (and remove when scrolling backwards), and use fitBounds for each chapter geojson (or a filled-in geojson to draw attention to an area). See http://github.io/jackdougherty/leaflet-storymap-polygons/
