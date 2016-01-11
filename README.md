@@ -6,8 +6,8 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 
 ### Benefits
 - Clean scroll-driven navigation, using screen swipe, trackpad, or keyboard down-arrow. Viewers may pan and zoom the map independently of the narration to explore further. Initial map displays all point markers.
-- Linked images may be stored in local subfolder or externally. Coordinate points, narration text, image links, and zoom levels for each chapter are stored in a local geoJSON file, which makes it easier to create new storymaps with minimal coding.
-- Responsive design that automatically resizes for all devices (but coding needs to be improved.)
+- Linked images may be stored in local subfolder or externally. Coordinate points, narration text, image links, and zoom levels for each chapter are stored in a local geoJSON file, which makes it easier to create new storymaps with minimal coding, and to preserve the data outside of the mapping technology.
+- Responsive design that automatically resizes for all devices (but CSS needs to be improved.)
 - Works in modern browsers (Chrome, Firefox, IE, Safari, including 1st generation iPad). Not supported in IE 8 or lower.
 - Uses only free and open-source Leaflet.js and jQuery libraries.
 
@@ -53,12 +53,44 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - Find a way to make the div chapter length variable, so that the height adjusts automatically for tall images and long descriptions, without adversely lengthening blank space for other chapters.
 - Make source-link optional by inserting an if/else statement for source-link=""
 - Is there a way to embed clickable hyperlinks inside description field of GeoJSON file?
-- Replace generic Leaflet blue markers with numbered circles or icons, matching chapter ID.
-  - Try this: http://giscollective.org/tutorials/quick-tips/numbered-icons-in-leaflet/
-  - I could not make this work: Font-Awesome-markers numeric (http://stackoverflow.com/questions/22622393/leaflet-awesome-markers-adding-numbers) using ( https://github.com/lvoogdt/Leaflet.awesome-markers/tree/6dd41539428caa28f75b30fa2cd8dcba2c202a86/dist) 
-  - or L.letterIcon (http://mapbbcode.org/leaflet.html)
 - Add code to make points clickable to auto-scroll to relevant narrative chapter. See http://muxlab.github.io/map-effects-100/Leaflet/12_map-driven-scroll-navigation.html OR http://jackdougherty.github.io/leaflet-stories
 - Aspirational goal: Add code to display different tileLayers (e.g. MAGIC 1934 Aerial, etc.) or overlays for different chapters, based on  instructed in GeoJSON file.
+- Create option to display photo icons based on images folder, similar to flickr photo feed icons
+```
+// Define flickrURL endpoint with API explorer: insert your own key, and tags= or text= to filter results
+var flickrURL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=25dcc9a8c7410551dcb0af48c778bde5&user_id=56513965%40N06&tags=HPHS&extras=geo%2Curl_t%2Curl_s%2Curl_m%2Ctitle&format=json&nojsoncallback=1";
+
+// Define the flickr popup display
+// ** TO DO: Rewrite link to view original source photo directly on Flickr
+// ** POSSIBLY include this code directly in the functions below for easier sequencing by novices
+var popupHTML = function(photo){
+  var result = "";
+      result = '<strong>'+photo.title+'</strong><br>';
+      result += '<a href="'+photo.url_m+'" target="_blank">';
+      result += '<img src="'+photo.url_s+'"></a>';      //was url_t; want url_s; can change to url_m if desired, but frame needs work
+      result += '<small>click image to enlarge in new tab</small>';
+      return result;
+}
+// Load photos from flickr JSON (insert your flickrURL above), display with clickable photo thumbnails
+$.getJSON(flickrURL, function (data) {
+  // Create new layerGroup for the markers, with option to append ".addTo(map);" to display by default
+  var layerGroup = new L.LayerGroup().addTo(map);
+  // Add layerGroup to your layer control and insert your label to appear in legend
+  controlLayers.addOverlay(layerGroup, 'HPHS photo icons');
+  // Start a loop to insert flickr photo data into photoContent
+  for (var i = 0; i < data.photos.photo.length; i++) {
+    var photoContent = data.photos.photo[i];
+    var photoIcon = L.icon(
+      {iconUrl: photoContent.url_t,
+      iconSize: [photoContent.width_t * 0.5, photoContent.height_t * 0.5]}  //reduces thumbnails 50%
+    );
+    var marker = new L.marker([photoContent.latitude, photoContent.longitude], {icon: photoIcon});
+    marker.bindPopup(popupHTML(photoContent));
+    // Add the marker to the layerGroup
+    marker.addTo(layerGroup);
+  }
+});
+```
 - Create leaflet-storymap-polygons version to tell stories about map boundaries (rather than points). Try creating each boundary chapter as its own geojson file (data1.js, data2.js, etc.), add each when chapter loads (and remove when scrolling backwards), and use fitBounds for each chapter geojson (or a filled-in geojson to draw attention to an area). See http://github.io/jackdougherty/leaflet-storymap-polygons/
 
 ## Code contributions welcome

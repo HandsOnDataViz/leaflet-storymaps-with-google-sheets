@@ -54,7 +54,16 @@ function initMap() {
     var geojson = L.geoJson(data, {
       onEachFeature: function (feature, layer) {
         (function(layer, properties) {
-          // Create Contents elements
+          // Create numerical icons to match the ID numbers
+          // OR remove the next 6 lines for default blue Leaflet markers
+          var numericMarker = L.ExtraMarkers.icon({
+            icon: 'fa-number',
+            number: feature.properties['id'],
+            markerColor: 'blue'
+          });
+          layer.setIcon(numericMarker);
+
+          // Create the contents of each chapter
           var chapter = $('<p></p>', {
             text: feature.properties['chapter'],
             class: 'chapter-header'
