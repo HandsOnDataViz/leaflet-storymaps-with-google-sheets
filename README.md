@@ -23,6 +23,11 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 
 ## Create your own storymap
 
+**TO DO** 
+- Describe a much simpler method to create the GeoJSON data file: provide a simple CSV template, then fill out and drag into http://geojson.io, and export (and rename) as .geojson
+- Simplify this file to remove unnnecessary items such as source info, and show users how to add these to code and template
+- 
+
 1. Download a copy of this code, or fork a copy to your GitHub account (requires free sign-up).
 1. Title: Edit the title in the index.HTML file, using a text editor. If you downloaded the code, try this free editor: https://atom.io/. If you forked the code on GitHub, view the master branch on the browser and click the editor button (pencil), then commit (save changes). Recommended: Try the free GitHub Desktop tool (Mac or Windows, https://desktop.github.com/) to easily move files and commit changes from online GitHub to local computer, and vice versa.
 1. Images: (Currently, all images must be about 300px wide, and roughly similar height.) Upload images into the "img" subfolder, or identify URLs to images on an external site.
