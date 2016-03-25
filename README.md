@@ -15,13 +15,21 @@ http://shuxinzhang.github.io/leaflet-storymap/index.html
 - Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
 - See http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
 
-## Compare with other storymap templates
+## Compare with other storymap tools and templates
+- http://storymaps.arcgis.com/en/ with open-source code at https://github.com/Esri/map-journal-storytelling-template-js
+- https://storymap.knightlab.com/
 - http://jackdougherty.github.io/leaflet-stories/index.html
 - http://jackdougherty.github.io/mapbox-storymap/index.html
 - http://jackdougherty.github.io/mapbox-storymap/pulse.html
 - http://jackdougherty.github.io/mapbox-storymap/markers.html
 
 ## Create your own storymap
+
+### TO DO
+- Rewrite below, move text, and point readers to http://DataVizForAll.org
+- Describe a much simpler method to create the GeoJSON data file: provide a simple CSV template, then fill out and drag into http://geojson.io, and export (and rename) as .geojson
+- Simplify this file to remove unnnecessary items such as source info, and show users how to add these to code and template
+
 
 1. Download a copy of this code, or fork a copy to your GitHub account (requires free sign-up).
 1. Title: Edit the title in the index.HTML file, using a text editor. If you downloaded the code, try this free editor: https://atom.io/. If you forked the code on GitHub, view the master branch on the browser and click the editor button (pencil), then commit (save changes). Recommended: Try the free GitHub Desktop tool (Mac or Windows, https://desktop.github.com/) to easily move files and commit changes from online GitHub to local computer, and vice versa.
@@ -42,7 +50,7 @@ http://shuxinzhang.github.io/leaflet-storymap/index.html
 1. Test your storymap. If you downloaded the code to your computer, set up a local development environment (for Mac, try free MAMP application: https://www.mamp.info), then open the index.html with your browser. If you forked the code to your GitHub account, then use the GitHub Pages feature to host your code on the live web. (See more about GitHub Pages hosting in http://www.datavizbook.org/content/publish/host-html-code-ghpages/tutorial.html).
 1. Live web hosting: Upload the entire storymap folder to a web server, or use GitHub Pages hosting feature.
 
-## To Do
+## To Do in general
 - Test IE 9+ browser.
 - Test large number of points
 - Test in more mobile devices to determine best responsive CSS strategy.
