@@ -1,19 +1,16 @@
 # leaflet-storymap
-Leaflet storymap with scroll-driven navigation for narrative and point markers
+Leaflet storymap with scroll-driven navigation for narrative and point markers from easy-to-learn template, with GeoJSON data file
 
 ## Demo
 http://jackdougherty.github.io/leaflet-storymap/index.html
 
 ### Benefits
-- Clean scroll-driven navigation, using screen swipe, trackpad, or keyboard down-arrow. Viewers may pan and zoom the map independently of the narration to explore further. Initial map displays all point markers.
-- Linked images may be stored in local subfolder or externally. Coordinate points, narration text, image links, and zoom levels for each chapter are stored in a local geoJSON file, which makes it easier to create new storymaps with minimal coding, and to preserve the data outside of the mapping technology.
+- Clean scroll-driven navigation, using screen swipe, trackpad, or keyboard down-arrow. Initial map displays all point markers. Viewers may pan and zoom the map independently of the narration to explore further.
+- Easy-to-learn template to create your own storymap. Upload coordinate points, zoom levels, narrative text, and image links into a CSV generic spreadsheet, and drag into http://geojson.io to create a GeoJSON data file.
+- Linked images may be stored in local subfolder or external URL.
 - Responsive design that automatically resizes for all devices (but CSS needs to be improved.)
 - Works in modern browsers (Chrome, Firefox, IE, Safari, including 1st generation iPad). Not supported in IE 8 or lower.
 - Uses only free and open-source Leaflet.js and jQuery libraries.
-
-## Credits
-- Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
-- See http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
 
 ## Compare with other storymap tools and templates
 - http://storymaps.arcgis.com/en/ with open-source code at https://github.com/Esri/map-journal-storytelling-template-js
@@ -23,12 +20,15 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - http://jackdougherty.github.io/mapbox-storymap/pulse.html
 - http://jackdougherty.github.io/mapbox-storymap/markers.html
 
+## Credits
+- Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
+- See http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
+
 ## Create your own storymap
 
-### TO DO
-- Rewrite below, move text, and point readers to http://DataVizForAll.org
-- Describe a much simpler method to create the GeoJSON data file: provide a simple CSV template, then fill out and drag into http://geojson.io, and export (and rename) as .geojson
-- Simplify this file to remove unnnecessary items such as source info, and show users how to add these to code and template
+See easy-to-learn instructions in the Leaflet code templates section of *Data Visualization for All* book at http://DataVizForAll.org
+
+
 
 
 1. Download a copy of this code, or fork a copy to your GitHub account (requires free sign-up).
