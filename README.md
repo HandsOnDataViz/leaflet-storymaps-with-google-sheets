@@ -28,6 +28,7 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 ## Credits
 - Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
 - See http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
+- Numeric icon markers thanks to https://github.com/coryasilva/Leaflet.ExtraMarkers and StackOverflow suggestions to modify
 
 ## Create your own storymap
 
