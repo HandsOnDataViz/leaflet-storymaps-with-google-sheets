@@ -1,60 +1,29 @@
-// Watch for scrollable container
+// This watches for the scrollable container
 var scrollPosition = 0;
 $('div#contents').scroll(function() {
   scrollPosition = $(this).scrollTop();
 });
-// Leaflet Map Init
-function initMap() {
-  var map = L.map('map', {
-    zoomControl: false
-  }).setView([0, 0], 5); // initial map automatically fits bounds of all markers
 
-  // optional : customize link to view source code; add your own GitHub repository
+function initMap() {
+
+  // This creates the Leaflet map with a generic start point, because code at bottom automatically fits bounds to all markers
+  var map = L.map('map').setView([0, 0], 5);
+
+  // This displays a base layer map (other options available)
+  var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+  }).addTo(map);
+
+  // This customizes link to view source code; add your own GitHub repository
   map.attributionControl
   .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-storymap">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
-  // optional: add legend to toggle any baselayers and/or overlays
-  // global variable with (null, null) allows indiv layers to be added inside functions below
-  var controlLayers = L.control.layers( null, null, {
-    position: "bottomright",
-    collapsed: false // false = open by default
-  }).addTo(map);
-
-  // optional: reposition zoom control other than default topleft
-  L.control.zoom({position: "topright"}).addTo(map);
-
-  /* BASELAYERS */
-  // use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
-  // .addTo(map); -- suffix displays baselayer by default
-  // controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
-  var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-  }).addTo(map); //this displays layer by default
-  controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
-
-  // Esri satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
-  var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-  });
-  controlLayers.addBaseLayer(Esri_WorldImagery, 'Esri Satellite');
-
-  // tileLayer.WMS as a baselayer - see http://leafletjs.com/reference.html#tilelayer-wms
-  // UConn MAGIC WMS settings - see http://geoserver.lib.uconn.edu:8080/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
-  var aerial1934 = new L.tileLayer.wms("http://geoserver.lib.uconn.edu:8080/geoserver/MAGIC/wms?", {
-    layers: 'MAGIC:1934 Connecticut Aerial Photography',
-    format: 'image/png',
-    version: '1.1.0',
-    transparent: true,
-    attribution: '1934 <a href="http://magic.library.uconn.edu">MAGIC UConn</a> and <a href="http://cslib.org">CSL</a>'
-  });
-  controlLayers.addBaseLayer(aerial1934, 'CT Aerial 1934');
-
-  // *GET THE GEOJSON
-  $.getJSON('data.geojson', function(data) {
+  // This loads the GeoJSON map data file from a local folder
+  $.getJSON('map.geojson', function(data) {
     var geojson = L.geoJson(data, {
       onEachFeature: function (feature, layer) {
         (function(layer, properties) {
-          // Create numerical icons to match the ID numbers
+          // This creates numerical icons to match the ID numbers
           // OR remove the next 6 lines for default blue Leaflet markers
           var numericMarker = L.ExtraMarkers.icon({
             icon: 'fa-number',
@@ -63,7 +32,7 @@ function initMap() {
           });
           layer.setIcon(numericMarker);
 
-          // Create the contents of each chapter
+          // This creates the contents of each chapter from the GeoJSON data. Unwanted items can be removed, and new ones can be added
           var chapter = $('<p></p>', {
             text: feature.properties['chapter'],
             class: 'chapter-header'
