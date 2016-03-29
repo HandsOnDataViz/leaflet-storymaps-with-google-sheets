@@ -1,3 +1,5 @@
+var imageContainerMargin = 70;  // Margin + padding
+
 // This watches for the scrollable container
 var scrollPosition = 0;
 $('div#contents').scroll(function() {
@@ -37,43 +39,69 @@ function initMap() {
             text: feature.properties['chapter'],
             class: 'chapter-header'
           });
+
           var image = $('<img>', {
             src: feature.properties['image'],
-            width: '100%'
           });
+
           var source = $('<a>', {
             text: feature.properties['source-credit'],
             href: feature.properties['source-link'],
             target: "_blank",
             class: 'source'
           });
+
           var description = $('<p></p>', {
             text: feature.properties['description'],
             class: 'description'
           });
+
           var container = $('<div></div>', {
             id: 'container' + feature.properties['id'],
             class: 'image-container'
           });
-          container.append(chapter).append(image).append(source).append(description);
+
+          var imgHolder = $('<div></div', {
+              class: 'img-holder'
+          });
+
+          imgHolder.append(image);
+
+          container.append(chapter).append(imgHolder).append(source).append(description);
           $('#contents').append(container);
-          // Watch the current scroll postion for scroll-driven map navigation!
-          var areaHeight = $('.image-container').height() + 50;
-          var areaTop = (feature.properties['id']-1) * areaHeight - 50; // -50 is a minor adjustment
-          var areaBottom = areaTop + areaHeight - 50; // -50 is a minor adjustment
+
+          var i;
+          var areaTop = -1 * $(window.top).height() / 3;
+          var areaBottom = 0;
+
+          console.log(areaTop);
+
+          // Calculating total height of blocks above active
+          for (i = 1; i < feature.properties['id']; i++) {
+              areaTop += $('div#container' + i).height() + imageContainerMargin;
+          }
+
+          areaBottom = areaTop + $('div#container' + feature.properties['id']).height();
+
           $('div#contents').scroll(function() {
-            if($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
-              $('.image-container').css('opacity', 0.3);
-              $('div#container' + feature.properties['id']).css('opacity', 1);
+            if ($(this).scrollTop() >= areaTop && $(this).scrollTop() < areaBottom) {
+              $('.image-container').removeClass("inFocus").addClass("outFocus");
+              $('div#container' + feature.properties['id']).addClass("inFocus").removeClass("outFocus");
+
               map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['zoom']);
             }
           });
+
         })(layer, feature.properties);
       }
     });
-    $('div#container1').css('opacity', 1);
+
+    $('div#container1').addClass("inFocus");
+    $('#contents').append("<div class='space-at-the-bottom'><i class='fa fa-anchor'></i></div>");
     map.fitBounds(geojson.getBounds());
     geojson.addTo(map);
   });
 }
+
+
 initMap();
