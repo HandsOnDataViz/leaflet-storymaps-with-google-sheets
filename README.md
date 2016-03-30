@@ -23,14 +23,16 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - http://jackdougherty.github.io/mapbox-storymap/markers.html
 
 ## Credits
-- Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100
-- See http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
+- Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100, see http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
+- Thanks [@ilyankou](https://github.com/ilyankou) for improving image display, navigation scroll, and web interface
 - Numeric icon markers thanks to https://github.com/coryasilva/Leaflet.ExtraMarkers and StackOverflow suggestions to modify
-- Thanks @ilyankou(https://github.com/ilyankou) for improving image display, navigation scroll, and web interface
 
 ## Create your own storymap
 
 See easy-to-learn instructions in the Leaflet Templates section of *Data Visualization for All* book at http://DataVizForAll.org
+
+## Examples and Added Features
+- Explore http://pembrokesoundscapes.ca/map, view code at https://github.com/rblades/rblades.github.io. Added audio playback in the narrative, historical map layers.
 
 ## To Do
 
