@@ -1,42 +1,32 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
-
-    <title>leaflet-storymap</title>
-    <!-- <link rel="shortcut icon" href="../img/favicon.ico"> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
-
-
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" />
-    <!-- Font-Awesome and leaflet.extramarkers dependency -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="markers/leaflet.extra-markers.min.js"></script>
-    <link rel="stylesheet" href="markers/leaflet.extra-markers.min.css">
-    <link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+<!-- Edit to insert your title to display in browser tab -->
+<title>leaflet-storymap</title>
+<!-- <link rel="shortcut icon" href="../img/favicon.ico"> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" />
+<!-- Font-Awesome and leaflet.extramarkers dependency -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src="markers/leaflet.extra-markers.min.js"></script>
+<link rel="stylesheet" href="markers/leaflet.extra-markers.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
+<div id="narration">
+  <!-- Edit to insert title -->
+  <div id="title" class="title-text">Insert Title of Leaflet Storymap<br>
+    <small>Scroll &#x25BE;</small>
+  </div>
+  <div id="contents"></div>
+</div>
+<div id="map"></div>
 
-    <div id="title" class="title-text">
-        <h3>Insert Title of Leaflet Storymap</h3>
-        <small>Scroll <i class="fa fa-chevron-down"></i></small>
-    </div>
-
-    <div id="narration">
-        <div id="contents">
-            <div class="space-at-the-top"></div>
-        </div>
-    </div>
-
-
-    <div id="map"></div>
-
-    <script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 
 </body>
 </html>
