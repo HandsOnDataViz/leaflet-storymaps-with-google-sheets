@@ -35,7 +35,7 @@ See easy-to-learn instructions in the Leaflet Templates section of *Data Visuali
 - Explore http://pembrokesoundscapes.ca/map, view code at https://github.com/rblades/rblades.github.io. Added audio playback in the narrative, historical map layers.
 
 ## To Do
-
+- Restore ability to insert as an iframe in another website -- see broken example: http://www.datavizforall.org/leaflet/storymap/index.html
 - Test responsive design on various devices
 - Change bottom icon to an up-arrow (or browser refresh symbol), and make it clickable to return to the top (or refresh browser).
 - Change code to make local download workable with Chrome browser (CORS error).
