@@ -71,7 +71,7 @@ function initMap() {
           $('#contents').append(container);
 
           var i;
-          var areaTop = -1 * $(window.top).height() / 3;
+          var areaTop = -100;
           var areaBottom = 0;
 
           console.log(areaTop);
