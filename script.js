@@ -97,7 +97,7 @@ function initMap() {
     });
 
     $('div#container1').addClass("inFocus");
-    $('#contents').append("<div class='space-at-the-bottom'><i class='fa fa-anchor'></i></div>");
+    $('#contents').append("<div class='space-at-the-bottom'><a href='#space-at-the-top'><i class='fa fa-arrow-up'></i></a></div>");
     map.fitBounds(geojson.getBounds());
     geojson.addTo(map);
   });
