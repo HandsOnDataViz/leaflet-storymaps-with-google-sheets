@@ -35,13 +35,9 @@ See easy-to-learn instructions in the Leaflet Templates section of *Data Visuali
 - Explore http://pembrokesoundscapes.ca/map, view code at https://github.com/rblades/rblades.github.io. Added audio playback in the narrative, historical map layers.
 
 ## To Do
-- Restore ability to insert as an iframe in another website -- see broken example: http://www.datavizforall.org/leaflet/storymap/index.html
-- Test responsive design on various devices
-- Change bottom icon to an up-arrow (or browser refresh symbol), and make it clickable to return to the top (or refresh browser).
-- Change code to make local download workable with Chrome browser (CORS error).
+- Change bottom icon to an up-arrow with "top" text, and make it clickable to return to the top
 - Add code to make points clickable to auto-scroll to relevant narrative chapter. See http://muxlab.github.io/map-effects-100/Leaflet/12_map-driven-scroll-navigation.html OR http://jackdougherty.github.io/leaflet-stories
 - Search for way to insert a URL hyperlink inside GeoJSON properties, to allow links within the description.
-- Create leaflet-storymap-polygons version to tell stories about map boundaries (rather than points). Try creating each boundary chapter as its own geojson file (data1.js, data2.js, etc.), add each when chapter loads (and remove when scrolling backwards), and use fitBounds for each chapter geojson (or a filled-in geojson to draw attention to an area). See http://github.io/jackdougherty/leaflet-storymap-polygons/
 
 ## Code contributions welcome
 - Submit GitHub pull requests to the dev branch
