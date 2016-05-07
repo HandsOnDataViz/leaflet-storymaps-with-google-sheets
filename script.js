@@ -9,7 +9,11 @@ $('div#contents').scroll(function() {
 function initMap() {
 
   // This creates the Leaflet map with a generic start point, because code at bottom automatically fits bounds to all markers
-  var map = L.map('map').setView([0, 0], 5);
+  var map = L.map('map', {
+    center: [0, 0],
+    zoom: 5,
+    scrollWheelZoom: false
+  });
 
   // This displays a base layer map (other options available)
   var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -18,7 +22,7 @@ function initMap() {
 
   // This customizes link to view source code; add your own GitHub repository
   map.attributionControl
-  .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-storymap">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+  .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-storymap" target="_blank">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
   // This loads the GeoJSON map data file from a local folder
   $.getJSON('map.geojson', function(data) {
@@ -62,7 +66,7 @@ function initMap() {
           });
 
           var imgHolder = $('<div></div', {
-              class: 'img-holder'
+            class: 'img-holder'
           });
 
           imgHolder.append(image);
@@ -74,11 +78,11 @@ function initMap() {
           var areaTop = -100;
           var areaBottom = 0;
 
-          console.log(areaTop);
+          // console.log(areaTop);
 
           // Calculating total height of blocks above active
           for (i = 1; i < feature.properties['id']; i++) {
-              areaTop += $('div#container' + i).height() + imageContainerMargin;
+            areaTop += $('div#container' + i).height() + imageContainerMargin;
           }
 
           areaBottom = areaTop + $('div#container' + feature.properties['id']).height();
@@ -97,11 +101,10 @@ function initMap() {
     });
 
     $('div#container1').addClass("inFocus");
-    $('#contents').append("<div class='space-at-the-bottom'><a href='#space-at-the-top'><i class='fa fa-arrow-up'></i></a></div>");
+    $('#contents').append("<div class='space-at-the-bottom'><a href='#space-at-the-top'><i class='fa fa-chevron-up'></i></br><small>Go to Top</small></a></div>");
     map.fitBounds(geojson.getBounds());
     geojson.addTo(map);
   });
 }
-
 
 initMap();
