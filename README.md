@@ -14,7 +14,9 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - Due to GeoJSON data limitations, there is no easy way to insert hyperlinks inside the 'description' text. They must be created outside, in fields such as "source-link"
 
 ### Compare with
-- Similar storymap that displays multiple GeoJSON boundary layers http://jackdougherty.github.io/leaflet-storymap-layers/index.html
+- Similar storymap that also displays multiple GeoJSON layers http://jackdougherty.github.io/leaflet-storymap-layers/index.html
+- Similar storymap that displays both tile layers and GeoJSON layers
+http://jackdougherty.github.io/otl-historical-town-borders/index.html
 - ArcGIS storymap http://storymaps.arcgis.com/en/ with open-source code at https://github.com/Esri/map-journal-storytelling-template-js
 - KnightLab storymap https://storymap.knightlab.com/
 
