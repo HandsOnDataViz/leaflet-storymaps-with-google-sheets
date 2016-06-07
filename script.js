@@ -78,8 +78,6 @@ function initMap() {
           var areaTop = -100;
           var areaBottom = 0;
 
-          // console.log(areaTop);
-
           // Calculating total height of blocks above active
           for (i = 1; i < feature.properties['id']; i++) {
             areaTop += $('div#container' + i).height() + imageContainerMargin;
@@ -94,6 +92,11 @@ function initMap() {
 
               map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0] ], feature.properties['zoom']);
             }
+          });
+
+          // Make markers clickable
+          layer.on('click', function() {
+            $("div#contents").animate({scrollTop: areaTop + "px"});
           });
 
         })(layer, feature.properties);
