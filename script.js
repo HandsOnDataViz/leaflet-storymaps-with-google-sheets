@@ -94,6 +94,11 @@ function initMap() {
             }
           });
 
+          // Make markers clickable
+          layer.on('click', function() {
+            $("div#contents").animate({scrollTop: areaTop + "px"});
+          });
+
         })(layer, feature.properties);
       }
     });
