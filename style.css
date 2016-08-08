@@ -2,6 +2,7 @@ body {
     padding: 0px;
     margin: 0px;
     font-family: "Helvetica", sans-serif;
+    overflow: hidden;
 }
 
 #map {
@@ -134,4 +135,24 @@ p.description {
 .outFocus {
     opacity: 0.3;
     background-color: white;
+}
+
+@media only screen and (max-device-width: 480px) {
+  ::-webkit-scrollbar {
+      display: none;
+  }
+  #map {
+    width: 100vw;
+    height: 180vh;
+  }
+  #title {
+    width: 80vw;
+    left: 10%;
+  }
+  #narration {
+    width: 80vw;
+    left: 10%;
+    background: none;
+    opacity: 0.8;
+  }
 }
