@@ -119,9 +119,6 @@ h3 {
 
 .description {
     margin: 20px;
-}
-
-p.description {
     text-align: left;
     font-size: 11pt;
     padding: 20px;
@@ -143,16 +140,24 @@ p.description {
   }
   #map {
     width: 100vw;
-    height: 180vh;
   }
   #title {
-    width: 80vw;
+    width: 80%;
     left: 10%;
+    min-width: 0;
   }
   #narration {
-    width: 80vw;
+    width: 80%;
+    min-width: 0;
     left: 10%;
     background: none;
     opacity: 0.8;
+  }
+  .description {
+      padding: 0;
+      padding-bottom: 10px;
+  }
+  .leaflet-control-container {
+      display: none;
   }
 }
