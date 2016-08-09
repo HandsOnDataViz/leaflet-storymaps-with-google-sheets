@@ -2,6 +2,7 @@ body {
     padding: 0px;
     margin: 0px;
     font-family: "Helvetica", sans-serif;
+    overflow: hidden;
 }
 
 #map {
@@ -118,9 +119,6 @@ h3 {
 
 .description {
     margin: 20px;
-}
-
-p.description {
     text-align: left;
     font-size: 11pt;
     padding: 20px;
@@ -134,4 +132,32 @@ p.description {
 .outFocus {
     opacity: 0.3;
     background-color: white;
+}
+
+@media only screen and (max-device-width: 480px) {
+  ::-webkit-scrollbar {
+      display: none;
+  }
+  #map {
+    width: 100vw;
+  }
+  #title {
+    width: 80%;
+    left: 10%;
+    min-width: 0;
+  }
+  #narration {
+    width: 80%;
+    min-width: 0;
+    left: 10%;
+    background: none;
+    opacity: 0.8;
+  }
+  .description {
+      padding: 0;
+      padding-bottom: 10px;
+  }
+  .leaflet-control-container {
+      display: none;
+  }
 }
