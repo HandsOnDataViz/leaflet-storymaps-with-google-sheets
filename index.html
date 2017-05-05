@@ -34,5 +34,18 @@
 
   <script type="text/javascript" src="script.js"></script>
 
+  <!-- handlebars template for each individual story -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
+  <script id="container-template" type="text/x-handlebars-template">
+    <div id="{{containerId}}" class="image-container">
+      <p class="chapter-header">{{chapter}}</p>
+      <div class="img-holder">
+        <img src="{{imgSrc}}">
+      </div>
+      <a href="{{srcHref}}" target="_blank" class="source">{{srcText}}</a>
+      <p class="description">{{{description}}}</p>
+    </div>
+  </script>
+
 </body>
 </html>

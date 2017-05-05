@@ -40,7 +40,7 @@ body {
 }
 
 #contents .space-at-the-bottom {
-    height: 130px;
+    height: 1000px; /* use a large number to ensure the last item is scrollable */
     margin: 0px;
     text-align: center;
     padding-top: 70px;

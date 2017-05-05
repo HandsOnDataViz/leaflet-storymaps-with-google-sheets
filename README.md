@@ -11,8 +11,23 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - Images can be stored in local subfolder or pulled from an external URL.
 - Works in modern browsers: Chrome, Firefox, Safari, Internet Explorer 9+.
 
-### Limitations
-- Due to GeoJSON data limitations, there is no easy way to insert hyperlinks inside the 'description' text. They must be created outside, in fields such as "source-link"
+### HTML template
+See the section labeled `handlebars template` in index.html and adjust the HTML within this [Handlebars template](http://handlebarsjs.com/) as required. 
+
+The variables within this template are injected at run-time via `script.js`:
+
+```
+var output = {
+    "containerId": 'container' + feature.properties['id'],
+    "chapter": feature.properties['chapter'],
+    "imgSrc": feature.properties['image'],
+    "srcHref": feature.properties['source-link'],
+    "srcText": feature.properties['source-credit'],
+    "description": feature.properties['description']
+}
+```
+
+Add corresponding sections to the HTML template and script to add new elements.
 
 ### Compare with
 - Easy-to-learn story map tools -- see Maps Mania 2016 review (http://googlemapsmania.blogspot.com/2016/06/easy-story-maps.html):
