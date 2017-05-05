@@ -39,40 +39,19 @@ function initMap() {
           layer.setIcon(numericMarker);
 
           // This creates the contents of each chapter from the GeoJSON data. Unwanted items can be removed, and new ones can be added
-          var chapter = $('<p></p>', {
-            text: feature.properties['chapter'],
-            class: 'chapter-header'
-          });
+          var containerSource = $("#container-template").html();
+          var containerTemplate = Handlebars.compile(containerSource);
 
-          var image = $('<img>', {
-            src: feature.properties['image'],
-          });
-
-          var source = $('<a>', {
-            text: feature.properties['source-credit'],
-            href: feature.properties['source-link'],
-            target: "_blank",
-            class: 'source'
-          });
-
-          var description = $('<p></p>', {
-            text: feature.properties['description'],
-            class: 'description'
-          });
-
-          var container = $('<div></div>', {
-            id: 'container' + feature.properties['id'],
-            class: 'image-container'
-          });
-
-          var imgHolder = $('<div></div', {
-            class: 'img-holder'
-          });
-
-          imgHolder.append(image);
-
-          container.append(chapter).append(imgHolder).append(source).append(description);
-          $('#contents').append(container);
+          var output = {
+            "containerId": 'container' + feature.properties['id'],
+            "chapter": feature.properties['chapter'],
+            "imgSrc": feature.properties['image'],
+            "srcHref": feature.properties['source-link'],
+            "srcText": feature.properties['source-credit'],
+            "description": feature.properties['description']
+          }
+          var html = containerTemplate(output);
+          $('#contents').append(html);
 
           var i;
           var areaTop = -100;
