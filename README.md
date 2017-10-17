@@ -10,9 +10,11 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - Easy-to-learn template to create your own storymap. Upload text, point coordinates, zoom levels, and image links to a CSV generic spreadsheet, and drag into http://geojson.io to create a GeoJSON data file.
 - Images can be stored in local subfolder or pulled from an external URL.
 - Works in modern browsers: Chrome, Firefox, Safari, Internet Explorer 9+.
+- Accessible tested using the WAVE and aXe tools.
 
 ### Limitations
-- Due to GeoJSON data limitations, there is no easy way to insert hyperlinks inside the 'description' text. They must be created outside, in fields such as "source-link"
+- Due to GeoJSON data limitations, there is no easy way to insert hyperlinks inside the 'description' text. They must be created outside, in fields such as "source-link".
+- Images must contain an [altnerative text](https://moz.com/learn/seo/alt-text), or alt tag description of the photo to maintain accessibility using the `alt` field in the csv/geojson.
 
 ### Compare with
 - Easy-to-learn story map tools -- see Maps Mania 2016 review (http://googlemapsmania.blogspot.com/2016/06/easy-story-maps.html):
