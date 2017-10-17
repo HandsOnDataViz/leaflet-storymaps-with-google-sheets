@@ -14,7 +14,11 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 
 ### Limitations
 - Due to GeoJSON data limitations, there is no easy way to insert hyperlinks inside the 'description' text. They must be created outside, in fields such as "source-link".
-- Images must contain an [altnerative text](https://moz.com/learn/seo/alt-text), or alt tag description of the photo to maintain accessibility using the `alt` field in the csv/geojson.
+- Images must contain an [alternative text](https://moz.com/learn/seo/alt-text), or alt tag description of the photo to maintain accessibility using the `alt` field in the csv/geojson.
+
+## See also
+- Easier-to-modify Leaflet Storymaps with Google Sheets
+- https://github.com/DataVizForAll/leaflet-storymaps-with-google-sheets
 
 ### Compare with
 - Easy-to-learn story map tools -- see Maps Mania 2016 review (http://googlemapsmania.blogspot.com/2016/06/easy-story-maps.html):
@@ -26,7 +30,6 @@ http://jackdougherty.github.io/leaflet-storymap/index.html
 - Related Leaflet storymap template that also displays both tile layers and GeoJSON layers
 http://jackdougherty.github.io/otl-historical-town-borders/index.html
 
-
 ## Requires open-source libraries
 - Leaflet.js
 - leaflet.extra-markers
@@ -36,6 +39,7 @@ http://jackdougherty.github.io/otl-historical-town-borders/index.html
 ## Credits
 - Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100, see http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html
 - Thanks [@ilyankou](https://github.com/ilyankou) for improving image display, navigation scroll, and web interface
+- Thanks [@geospatialem] (https://github.com/geospatialem) for accessibility improvements
 - Numeric icon markers thanks to https://github.com/coryasilva/Leaflet.ExtraMarkers and StackOverflow suggestions for modification
 
 ## Create your own storymap
@@ -44,6 +48,3 @@ See easy-to-learn instructions in the Leaflet Templates section of *Data Visuali
 
 ## Examples with Added Features
 - Explore http://pembrokesoundscapes.ca/map, view code at https://github.com/rblades/rblades.github.io. Added audio playback in the narrative, historical map layers.
-
-## Code contributions welcome
-- Submit GitHub pull requests to the dev branch
