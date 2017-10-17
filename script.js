@@ -45,7 +45,8 @@ function initMap() {
           });
 
           var image = $('<img>', {
-            src: feature.properties['image'],
+            alt: feature.properties['alt'],
+            src: feature.properties['image']
           });
 
           var source = $('<a>', {
