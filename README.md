@@ -20,7 +20,7 @@ Inspired by Code for Atlanta mapsfor.us (2016) https://github.com/codeforatlanta
 
 | Library | Version | License | Notes |
 |--       |--       |--       |--
-|[Leaflet](https://leafletjs.com)| 1.3.1 | BSD-2-Clause | https://leafletjs.com
+| [Leaflet](https://leafletjs.com)| 1.4.0 | BSD-2-Clause | https://leafletjs.com
 | [jQuery](https://code.jquery.com) | 3.3.1| MIT | https://code.jquery.com
 | [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers) | 1.1.15 | BSD-2-Clause | Manually updated for Carto https https://github.com/leaflet-extras/leaflet-providers |
 | [Leaflet.awesome-markers](https://github.com/sigma-geosistemas/Leaflet.awesome-markers) | 2.0.4 | MIT | https://github.com/sigma-geosistemas/Leaflet.awesome-markers |
@@ -29,6 +29,7 @@ Inspired by Code for Atlanta mapsfor.us (2016) https://github.com/codeforatlanta
 | [Google Sheets Geocoder](https://github.com/jackdougherty/google-sheets-geocoder) | 1.0 | No License | By Ilya Ilyankou and Jack Dougherty https://github.com/jackdougherty/google-sheets-geocoder
 | [jQuery-CSV](https://github.com/evanplaice/jquery-csv) | 0.71 | MIT | https://github.com/evanplaice/jquery-csv
 | [Leaflet.ExtraMarkers](https://github.com/coryasilva/Leaflet.ExtraMarkers) | ? | MIT | https://github.com/coryasilva/Leaflet.ExtraMarkers
+| [FontAwesome](https://fontawesome.com) | 5.8.1 | Font Awesome Free License | https://fontawesome.com |
 
 ## License
 MIT

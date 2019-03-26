@@ -167,6 +167,8 @@ $(window).on('load', function() {
         'jpeg': 'img',
         'png': 'img',
         'mp3': 'audio',
+        'ogg': 'audio',
+        'wav': 'audio',
       }
 
       var mediaExt = c['Media Link'].split('.').pop();
