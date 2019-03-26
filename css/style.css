@@ -1,0 +1,140 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Helvetica", sans-serif;
+  overflow: hidden;
+}
+
+#map {
+  height: 200px;
+  width: 100vw;
+  position: absolute;
+  border-bottom: 3px solid orange;
+  top: 0;
+  left: 0;
+}
+
+#narration {
+  position: absolute;
+  top: 203px;
+  width: 100vw;
+  height: calc(100vh - 203px);
+  z-index: 80;
+}
+
+#contents {
+  padding: 0;
+  width: 100%;
+  margin-top: 0; /*Adjust if Title header needs more space */
+  height: 100%; /* Adjust to fit max Description length, one setting for all; alternative is 100% */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#top {
+  height: 30px;
+  margin: 0;
+}
+
+#space-at-the-bottom {
+  height: 200px;
+  margin: 0;
+  text-align: center;
+  padding-top: 150px;
+}
+
+#title {
+  position: absolute;
+  left: 0;
+  top: 203px;
+  background-color: white;
+  width: 100vw;
+  z-index: 100;
+  margin: 0;
+  padding: 20px 0;
+  visibility: hidden;
+  font-weight: bold;
+  text-align: center;
+}
+
+h3 {
+  margin: 0;
+}
+
+.chapter-container {
+  /* margin + padding = chapterContainerMargin in script.js */
+  /* Important for scrolling! */
+  margin: 50px 0 0 0;
+  padding: 20px 0 0 0;
+  text-align: center;
+}
+
+.chapter-container img {
+  height: auto;
+  width: auto;
+  max-height: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Three lines that center vertically */
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.img-container {
+  margin: 0;
+  margin-bottom: 5px;
+  height: 200px;
+  max-height: 200px;
+  width: 100%;
+}
+
+.audio-container {
+  margin: 0;
+  margin-bottom: 5px;
+  height: 60px;
+  max-height: 60px;
+  width: 100%;
+}
+
+.chapter-header {
+  display: block;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 0 5px;
+}
+
+.source {
+  font-size: 9pt;
+  margin: 20px;
+}
+
+.description {
+  margin: 20px;
+  text-align: left;
+  font-size: 11pt;
+  padding: 20px;
+}
+
+.in-focus {
+  opacity: 1.0;
+}
+
+.out-focus {
+  opacity: 0.3;
+}
+
+.leaflet-control-attribution {
+  visibility: hidden;
+}
+
+.leaflet-marker-icon {
+  opacity: 0.75;
+}
+
+a.source, a.source:visited {
+  color: grey;
+  font-style: italic;
+}

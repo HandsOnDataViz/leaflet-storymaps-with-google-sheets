@@ -1,38 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="initial-scale=1"/>
-  <title>leaflet-storymap</title>
-  <!-- Load Leaflet from a https CDN, not http. Look for updates at http://leafletjs.com/download.html -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.2/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
-  <!-- load jQuery  -->
-  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-  <!-- load Font-Awesome -->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <title>Leaflet Storymaps with Google Sheets Template</title>
+
+  <!-- Load Leaflet from Cloudflare CDN, https not http.
+       Latest release can be found on at http://leafletjs.com/download.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+
+  <!-- Load jQuery  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+  <!-- Load Font-Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-  <!-- Load leaflet.extra-markers from local directory -->
-  <script src="markers/leaflet.extra-markers.min.js"></script>
   <link rel="stylesheet" href="markers/leaflet.extra-markers.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-desktop.css">
+  <link rel="stylesheet" href="css/loader.css">
 </head>
 
 <body>
-  <div id="title" class="title-text">
-    <h1>Insert your title here</h1>
-    <small>Scroll <i class="fa fa-chevron-down"></i></small>
-  </div>
+
+  <div id="title"></div>
 
   <div id="narration">
     <div id="contents">
-      <div id="space-at-the-top" class="space-at-the-top"></div>
+      <div id="top"></div>
     </div>
   </div>
 
+  <div class="loader">Loading...</div>
   <div id="map"></div>
 
-  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript">
+    // Create the Leaflet map with a generic start point
+    var map = L.map('map', {
+      center: [0, 0],
+      zoom: 1,
+      scrollWheelZoom: false,
+      zoomControl: false
+    });
+  </script>
+
+  <script type="text/javascript" src="google-doc-url.js"></script>
+  <script type="text/javascript" src="scripts/tabletop.js"></script>
+  <script type="text/javascript" src="scripts/leaflet-providers/leaflet-providers.js"></script>
+  <script type="text/javascript" src="markers/leaflet.extra-markers.min.js"></script>
+  <script type="text/javascript" src="scripts/constants.js"></script>
+  <script type="text/javascript" src="scripts/jquery.csv.js"></script>
+  <script type="text/javascript" src="scripts/procsv.js"></script>
+  <script type="text/javascript" src="scripts/storymap.js"></script>
 
 </body>
 </html>

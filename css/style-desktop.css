@@ -1,0 +1,28 @@
+@media screen and (min-width: 768px) {
+
+  #narration {
+    width: 60vw;
+    height: 100vh;
+    max-width: 500px;
+    top: 0;
+  }
+
+  #map {
+    width: calc(100vw - 460px);
+    left: 460px;
+    height: 100vh;
+    border: 0;
+    z-index: 0;
+  }
+
+  #title {
+    width: 60vw;
+    max-width: 500px;
+    top: 0;
+  }
+
+  .leaflet-control-attribution {
+    visibility: visible;
+  }
+
+}
