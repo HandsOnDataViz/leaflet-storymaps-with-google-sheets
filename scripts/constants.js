@@ -14,7 +14,7 @@ var constants = {
 	_tileProvider: 'Basemap Tiles',
 	_zoomControls: 'Zoom Controls',
   _narrativeWidth: 'Narrative Width',
-  _imgContainerHeight: 'Image Container Height',
+  _imgContainerHeight: 'Media Container Height',
   _pixelsAfterFinalChapter: 'Pixels After Final Chapter',
   _narrativeBackground: 'Narrative Background Color',
   _narrativeText: 'Narrative Text Color',

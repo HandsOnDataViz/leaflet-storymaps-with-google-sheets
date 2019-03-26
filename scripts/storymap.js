@@ -74,7 +74,7 @@ $(window).on('load', function() {
 
       $('#narration, #title').css('width', narrativeWidth + 'vw');
       $('#map').css('width', mapWidth + 'vw');
-    }*/
+    } */
 
     var chapterContainerMargin = 70;
 
