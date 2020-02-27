@@ -96,7 +96,9 @@ $(window).on('load', function() {
 
     var markers = [];
     changeMarkerColor = function(n, from, to) {
-      markers[n]._icon.className = markers[n]._icon.className.replace(from, to);
+      if (markers[n]) {
+        markers[n]._icon.className = markers[n]._icon.className.replace(from, to);
+      }
     }
 
     var pixelsAbove = [];
