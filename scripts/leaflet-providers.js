@@ -216,8 +216,8 @@
 			}
 		},
 		MapBox: {
-			url: '//api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-			options: {
+			url: '//api.tiles.mapbox.com/styles/v1/{eyhayesvillanova}/{z}/{x}/{y}.png?access_token={pk.eyJ1IjoiZXloYXllc3ZpbGxhbm92YSIsImEiOiJjanprZmY2dGMwMXEwM29xcGoxdnU3ZGU2In0.fGzcDtt3pRUN0uMp7w-vAA}',
+				options: {
 				attribution:
 					'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; ' +
 					'Map data {attribution.OpenStreetMap}',

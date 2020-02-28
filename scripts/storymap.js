@@ -230,7 +230,7 @@ $(window).on('load', function() {
 
           currentlyInFocus = i;
 
-          for (k = 0; k < pixelsAbove.length - 1; k++) {
+          for (k = 3; k < pixelsAbove.length - 2; k++) {
             changeMarkerColor(k, 'orange', 'blue');
           }
 
@@ -345,6 +345,7 @@ $(window).on('load', function() {
     var name = getSetting('_authorName');
     var url = getSetting('_authorURL');
 
+
     if (name && url) {
       if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
       credit += ' by <a href="' + url + '">' + name + '</a> | ';
@@ -356,8 +357,12 @@ $(window).on('load', function() {
 
     credit += 'View <a href="' + getSetting('_githubRepo') + '">code</a>';
     if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
-    credit += ' with ';
+    credit += ' | ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
+
+
   }
+
+
 
 });

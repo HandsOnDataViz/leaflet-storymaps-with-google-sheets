@@ -9,6 +9,7 @@ var constants = {
 	_authorName: 'Author Name',
 	_authorURL: 'Author Email or Website',
   _codeCredit: 'Code Credit',
+	_websupport: 'Web Development Support',
 	_githubRepo: 'Author GitHub Repo Link',
 	// Map Settings
 	_tileProvider: 'Basemap Tiles',
