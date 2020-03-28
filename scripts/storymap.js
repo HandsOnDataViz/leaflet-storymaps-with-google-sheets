@@ -10,16 +10,30 @@ $(window).on('load', function() {
     scrollPosition = $(this).scrollTop();
   });
 
-  /**
-   * Triggers the load of the spreadsheet and map creation
-   */
-   var mapData;
+  // First, try reading data from the Google Sheet
+  if (typeof googleDocURL !== 'undefined' && googleDocURL) {
+    Tabletop.init({
+      key: googleDocURL,
+      callback: function(data, tt) {
+        initMap(
+          data.Options.elements,
+          data.Chapters.elements
+        )
+      }
+    })
+  }
+  // Else, try csv/Options.csv and csv/Chapters.csv
+  else {
+    $.get('csv/Options.csv', function(options) {
+      $.get('csv/Chapters.csv', function(chapters) {
+        initMap(
+          $.csv.toObjects(options),
+          $.csv.toObjects(chapters),
+        )
+      }).fail(function(e) { alert('Could not read Chapters.csv') });
+    }).fail(function(e) { alert('Could not read Options.csv') })
+  }
 
-   // Use Tabletop to fetch data from the Google sheet
-   mapData = Tabletop.init({
-     key: googleDocURL,
-     callback: function(data, mapData) { initMap(); }
-   });
 
   /**
   * Reformulates documentSettings as a dictionary, e.g.
@@ -62,19 +76,8 @@ $(window).on('load', function() {
     }).addTo(map);
   }
 
-  function initMap() {
-    var options = mapData.sheets(constants.optionsSheetName).elements;
+  function initMap(options, chapters) {
     createDocumentSettings(options);
-
-    /* Change narrative width */
-    /*
-    narrativeWidth = parseInt(getSetting('_narrativeWidth'));
-    if (narrativeWidth > 0 && narrativeWidth < 100) {
-      var mapWidth = 100 - narrativeWidth;
-
-      $('#narration, #title').css('width', narrativeWidth + 'vw');
-      $('#map').css('width', mapWidth + 'vw');
-    } */
 
     var chapterContainerMargin = 70;
 
@@ -92,8 +95,6 @@ $(window).on('load', function() {
       }).addTo(map);
     }
 
-    var chapters = mapData.sheets(constants.chaptersSheetName).elements;
-
     var markers = [];
     changeMarkerColor = function(n, from, to) {
       if (markers[n]) {
@@ -106,6 +107,7 @@ $(window).on('load', function() {
 
     var currentlyInFocus; // integer to specify each chapter is currently in focus
     var overlay;  // URL of the overlay for in-focus chapter
+    var geoJsonOverlay;
 
     for (i in chapters) {
       var c = chapters[i];
@@ -114,13 +116,17 @@ $(window).on('load', function() {
         var lat = parseFloat(c['Latitude']);
         var lon = parseFloat(c['Longitude']);
 
+        chapterCount += 1;
+
         markers.push(
           L.marker([lat, lon], {
             icon: L.ExtraMarkers.icon({
               icon: 'fa-number',
-              number: ++chapterCount,
+              number: c['Marker'] === 'Plain' ? '' : chapterCount,
               markerColor: 'blue'
-            })
+            }),
+            opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
+            interactive: c['Marker'] === 'Hidden' ? false : true,
           }
         ));
 
@@ -148,7 +154,7 @@ $(window).on('load', function() {
       });
 
       // YouTube
-      if (c['Media Link'].indexOf('youtube.com/') > -1) {
+      if (c['Media Link'] && c['Media Link'].indexOf('youtube.com/') > -1) {
         media = $('<iframe></iframe>', {
           src: c['Media Link'],
           width: '100%',
@@ -223,8 +229,12 @@ $(window).on('load', function() {
         $('#title').css('opacity', 1 - Math.min(1, currentPosition / 100));
       }
 
-      for (i = 0; i < pixelsAbove.length - 1; i++) {
-        if (currentPosition >= pixelsAbove[i] && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin) && currentlyInFocus != i) {
+      for (var i = 0; i < pixelsAbove.length - 1; i++) {
+        
+        if ( currentPosition >= pixelsAbove[i]
+          && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin)
+          && currentlyInFocus != i
+        ) {
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
           $('.chapter-container').removeClass("in-focus").addClass("out-focus");
@@ -232,7 +242,7 @@ $(window).on('load', function() {
 
           currentlyInFocus = i;
 
-          for (k = 0; k < pixelsAbove.length - 1; k++) {
+          for (var k = 0; k < pixelsAbove.length - 1; k++) {
             changeMarkerColor(k, 'orange', 'blue');
           }
 
@@ -243,10 +253,17 @@ $(window).on('load', function() {
             map.removeLayer(overlay);
           }
 
+          // Remove GeoJson Overlay tile layer if needed
+          if (map.hasLayer(geoJsonOverlay)) {
+            map.removeLayer(geoJsonOverlay);
+          }
+
+          var c = chapters[i];
+
           // Add chapter's overlay tiles if specified in options
-          if (chapters[i]['Overlay'] != '') {
-            var opacity = (chapters[i]['Overlay Transparency'] != '') ? parseFloat(chapters[i]['Overlay Transparency']) : 1;
-            var url = chapters[i]['Overlay'];
+          if (c['Overlay']) {
+            var opacity = (c['Overlay Transparency'] !== '') ? parseFloat(c['Overlay Transparency']) : 1;
+            var url = c['Overlay'];
 
             if (url.split('.').pop() == 'geojson') {
               $.getJSON(url, function(geojson) {
@@ -263,15 +280,45 @@ $(window).on('load', function() {
                 }).addTo(map);
               });
             } else {
-              overlay = L.tileLayer(chapters[i]['Overlay'], {opacity: opacity}).addTo(map);
+              overlay = L.tileLayer(c['Overlay'], {opacity: opacity}).addTo(map);
             }
 
           }
 
+          if (c['GeoJSON Overlay']) {
+            $.getJSON(c['GeoJSON Overlay'], function(geojson) {
+
+              // Parse properties string into a JS object
+              var props = {};
+
+              if (c['GeoJSON Feature Properties']) {
+                var propsArray = c['GeoJSON Feature Properties'].split(';');
+                var props = {};
+                for (var p in propsArray) {
+                  if (propsArray[p].split(':').length === 2) {
+                    props[ propsArray[p].split(':')[0].trim() ] = propsArray[p].split(':')[1].trim();
+                  }
+                }
+              }
+
+              geoJsonOverlay = L.geoJson(geojson, {
+                style: function(feature) {
+                  return {
+                    fillColor: feature.properties.COLOR || props.fillColor || 'white',
+                    weight: props.weight || 1,
+                    opacity: props.opacity || 0.5,
+                    color: feature.properties.COLOR || props.color || 'silver',
+                    fillOpacity: props.fillOpacity || 0.5,
+                  }
+                }
+              }).addTo(map);
+            });
+          }
+
           // Fly to the new marker destination if latitude and longitude exist
-          if (chapters[i]['Latitude'] && chapters[i]['Longitude']) {
-            var zoom = chapters[i]['Zoom'] ? chapters[i]['Zoom'] : CHAPTER_ZOOM;
-            map.flyTo([chapters[i]['Latitude'], chapters[i]['Longitude']], zoom);
+          if (c['Latitude'] && c['Longitude']) {
+            var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
+            map.flyTo([c['Latitude'], c['Longitude']], zoom);
           }
 
           // No need to iterate through the following chapters
@@ -343,7 +390,11 @@ $(window).on('load', function() {
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'View <a href="' + googleDocURL + '" target="_blank">data</a>';
+    var credit = 'View <a href="'
+      // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
+      + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
+      + '" target="_blank">data</a>';
+    
     var name = getSetting('_authorName');
     var url = getSetting('_authorURL');
 

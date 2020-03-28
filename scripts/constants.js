@@ -1,7 +1,4 @@
 var constants = {
-  // Tabs in Google Sheet
-	optionsSheetName: 'Options',
-	chaptersSheetName: 'Chapters',
 	// Storymapap Info
   _mapTitle: 'Storymap Title',
   _mapSubtitle: 'Storymap Subtitle',

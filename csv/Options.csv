@@ -1,0 +1,18 @@
+Setting,Customize,Hints,Examples
+Storymap Info,,,
+Storymap Title,My Story Map,,
+Storymap Subtitle,Insert my subtitle here,,
+Map Settings,,,
+Basemap Tiles,CartoDB.Positron,Drop-down menu for background basemap tiles,https://leaflet-extras.github.io/leaflet-providers/preview/
+Zoom Controls,bottomright,,
+Narrative Background Color,,,
+Narrative Text Color,,,
+Narrative Link Color,,,
+Active Chapter Background Color,,,
+Media Container Height,300,"Maximum height of the image, in pixels. 200 is default. The image will be fit into the container with its proportions kept (it won't be skewed).",
+Pixels After Final Chapter,600,In pixels. At least 100,
+Credits,,,
+Author Name,Jack Dougherty,"Appears in map credits as ""View data by..."" (or leave blank)",
+Author Email or Website,jack.dougherty@trincoll.edu,Create link in Author Name by inserting your email or web address (or leave blank),
+Author GitHub Repo Link,https://github.com/DataVizForAll/leaflet-maps-with-google-sheets,"Appears in map credits as ""View code..."" link (leave as-is OR insert link to your own GitHub code repo)",
+Code Credit,"<a href=""http://datavizforall.org"">DataVizForAll</a>",,
