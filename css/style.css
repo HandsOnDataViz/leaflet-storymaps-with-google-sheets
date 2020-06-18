@@ -32,7 +32,7 @@ body {
 }
 
 #top {
-  height: 30px;
+  height: 40px;
   margin: 0;
 }
 
@@ -51,14 +51,10 @@ body {
   width: 100vw;
   z-index: 100;
   margin: 0;
-  padding: 20px 0;
+  padding: 0;
   visibility: hidden;
   font-weight: bold;
   text-align: center;
-}
-
-h3 {
-  margin: 0;
 }
 
 .chapter-container {
@@ -137,4 +133,45 @@ h3 {
 a.source, a.source:visited {
   color: grey;
   font-style: italic;
+}
+
+/*
+  By default, current (active) marker is orange.
+  If you want to change the color, see options here: https://github.com/coryasilva/Leaflet.ExtraMarkers/blob/master/src/assets/css/leaflet.extra-markers.css
+*/
+.marker-active {
+  background-position: -72px 0 !important;
+}
+
+/* Storymap logo image above the title */
+#logo {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding: 10px;
+  max-width: 100%;
+}
+
+#logo img {
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+#header {
+  padding: 5px 0;
+  text-align: center;
+  color: #333;
+}
+
+/* Storymap title & subtitle */
+h1 {
+  margin: 0;
+  font-size: 1.35em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.0em;
+  font-weight: normal;
 }
