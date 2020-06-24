@@ -109,11 +109,15 @@ $(window).on('load', function() {
     var markActiveColor = function(k) {
       /* Removes marker-active class from all markers */
       for (var i = 0; i < markers.length; i++) {
-        markers[i]._icon.className = markers[i]._icon.className.replace(' marker-active', '');
-      }
+        if (markers[i] && markers[i]._icon) {
+          markers[i]._icon.className = markers[i]._icon.className.replace(' marker-active', '');
 
-      /* Adds marker-active class, which is orange, to marker k */
-      markers[k]._icon.className += ' marker-active';
+          if (i == k) {
+            /* Adds marker-active class, which is orange, to marker k */
+            markers[k]._icon.className += ' marker-active';
+          }
+        }
+      }
     }
 
     var pixelsAbove = [];
