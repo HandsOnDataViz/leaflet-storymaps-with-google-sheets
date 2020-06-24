@@ -82,8 +82,17 @@ $(window).on('load', function() {
     var chapterContainerMargin = 70;
 
     document.title = getSetting('_mapTitle');
-    $('#title').append('<h3>' + getSetting('_mapTitle') + '</h3>');
-    $('#title').append('<small>' + getSetting('_mapSubtitle') + '</small>');
+    $('#header').append('<h1>' + getSetting('_mapTitle') + '</h1>');
+    $('#header').append('<h2>' + getSetting('_mapSubtitle') + '</h2>');
+
+    // Add logo
+    if (getSetting('_mapLogo')) {
+      $('#logo').append('<img src="' + getSetting('_mapLogo') + '" />');
+      $('#top').css('height', '60px');
+    } else {
+      $('#logo').css('display', 'none');
+      $('#header').css('padding-top', '25px');
+    }
 
     // Load tiles
     addBaseMap();
@@ -96,10 +105,15 @@ $(window).on('load', function() {
     }
 
     var markers = [];
-    changeMarkerColor = function(n, from, to) {
-      if (markers[n]) {
-        markers[n]._icon.className = markers[n]._icon.className.replace(from, to);
+
+    var markActiveColor = function(k) {
+      /* Removes marker-active class from all markers */
+      for (var i = 0; i < markers.length; i++) {
+        markers[i]._icon.className = markers[i]._icon.className.replace(' marker-active', '');
       }
+
+      /* Adds marker-active class, which is orange, to marker k */
+      markers[k]._icon.className += ' marker-active';
     }
 
     var pixelsAbove = [];
@@ -123,7 +137,7 @@ $(window).on('load', function() {
             icon: L.ExtraMarkers.icon({
               icon: 'fa-number',
               number: c['Marker'] === 'Plain' ? '' : chapterCount,
-              markerColor: 'blue'
+              markerColor: c['Marker Color'] || 'blue'
             }),
             opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
             interactive: c['Marker'] === 'Hidden' ? false : true,
@@ -179,7 +193,7 @@ $(window).on('load', function() {
         'wav': 'audio',
       }
 
-      var mediaExt = c['Media Link'].split('.').pop();
+      var mediaExt = c['Media Link'].split('.').pop().toLowerCase();
       var mediaType = mediaTypes[mediaExt];
 
       if (mediaType) {
@@ -241,12 +255,7 @@ $(window).on('load', function() {
           $('div#container' + i).addClass("in-focus").removeClass("out-focus");
 
           currentlyInFocus = i;
-
-          for (var k = 0; k < pixelsAbove.length - 1; k++) {
-            changeMarkerColor(k, 'orange', 'blue');
-          }
-
-          changeMarkerColor(i, 'blue', 'orange');
+          markActiveColor(currentlyInFocus);
 
           // Remove overlay tile layer if needed
           if (map.hasLayer(overlay)) {
