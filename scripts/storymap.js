@@ -164,12 +164,20 @@ $(window).on('load', function() {
       var mediaContainer = null;
 
       // Add media source
-      var source = $('<a>', {
-        text: c['Media Credit'],
-        href: c['Media Credit Link'],
-        target: "_blank",
-        class: 'source'
-      });
+      var source = '';
+      if (c['Media Credit Link']) {
+        source = $('<a>', {
+          text: c['Media Credit'],
+          href: c['Media Credit Link'],
+          target: "_blank",
+          class: 'source'
+        });
+      } else {
+        source = $('<span>', {
+          text: c['Media Credit'],
+          class: 'source'
+        });
+      }
 
       // YouTube
       if (c['Media Link'] && c['Media Link'].indexOf('youtube.com/') > -1) {
