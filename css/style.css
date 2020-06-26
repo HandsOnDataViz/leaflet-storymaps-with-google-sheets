@@ -104,7 +104,11 @@ body {
 
 .source {
   font-size: 9pt;
-  margin: 20px;
+  font-style: italic;
+  color: gray;
+}
+a.source:visited {
+  color: grey;
 }
 
 .description {
@@ -128,11 +132,6 @@ body {
 
 .leaflet-marker-icon {
   opacity: 0.75;
-}
-
-a.source, a.source:visited {
-  color: grey;
-  font-style: italic;
 }
 
 /*
