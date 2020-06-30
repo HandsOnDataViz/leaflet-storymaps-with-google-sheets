@@ -6,11 +6,12 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
   <title>Leaflet Storymaps with Google Sheets Template</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+  <!-- Load Leaflet CSS and JS from CDN-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
 
   <!-- Load jQuery  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- Load Font-Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -22,7 +23,10 @@
 
 <body>
 
-  <div id="title"></div>
+  <div id="title">
+    <div id="logo"></div>
+    <div id="header"></div>
+  </div>
 
   <div id="narration">
     <div id="contents">
@@ -49,7 +53,6 @@
   <script type="text/javascript" src="markers/leaflet.extra-markers.min.js"></script>
   <script type="text/javascript" src="scripts/constants.js"></script>
   <script type="text/javascript" src="scripts/jquery.csv.js"></script>
-  <script type="text/javascript" src="scripts/procsv.js"></script>
   <script type="text/javascript" src="scripts/storymap.js"></script>
 
 </body>

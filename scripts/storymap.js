@@ -10,16 +10,30 @@ $(window).on('load', function() {
     scrollPosition = $(this).scrollTop();
   });
 
-  /**
-   * Triggers the load of the spreadsheet and map creation
-   */
-   var mapData;
+  // First, try reading data from the Google Sheet
+  if (typeof googleDocURL !== 'undefined' && googleDocURL) {
+    Tabletop.init({
+      key: googleDocURL,
+      callback: function(data, tt) {
+        initMap(
+          data.Options.elements,
+          data.Chapters.elements
+        )
+      }
+    })
+  }
+  // Else, try csv/Options.csv and csv/Chapters.csv
+  else {
+    $.get('csv/Options.csv', function(options) {
+      $.get('csv/Chapters.csv', function(chapters) {
+        initMap(
+          $.csv.toObjects(options),
+          $.csv.toObjects(chapters),
+        )
+      }).fail(function(e) { alert('Could not read Chapters.csv') });
+    }).fail(function(e) { alert('Could not read Options.csv') })
+  }
 
-   // Use Tabletop to fetch data from the Google sheet
-   mapData = Tabletop.init({
-     key: googleDocURL,
-     callback: function(data, mapData) { initMap(); }
-   });
 
   /**
   * Reformulates documentSettings as a dictionary, e.g.
@@ -62,25 +76,23 @@ $(window).on('load', function() {
     }).addTo(map);
   }
 
-  function initMap() {
-    var options = mapData.sheets(constants.optionsSheetName).elements;
+  function initMap(options, chapters) {
     createDocumentSettings(options);
-
-    /* Change narrative width */
-    /*
-    narrativeWidth = parseInt(getSetting('_narrativeWidth'));
-    if (narrativeWidth > 0 && narrativeWidth < 100) {
-      var mapWidth = 100 - narrativeWidth;
-
-      $('#narration, #title').css('width', narrativeWidth + 'vw');
-      $('#map').css('width', mapWidth + 'vw');
-    } */
 
     var chapterContainerMargin = 70;
 
     document.title = getSetting('_mapTitle');
-    $('#title').append('<h3>' + getSetting('_mapTitle') + '</h3>');
-    $('#title').append('<small>' + getSetting('_mapSubtitle') + '</small>');
+    $('#header').append('<h1>' + getSetting('_mapTitle') + '</h1>');
+    $('#header').append('<h2>' + getSetting('_mapSubtitle') + '</h2>');
+
+    // Add logo
+    if (getSetting('_mapLogo')) {
+      $('#logo').append('<img src="' + getSetting('_mapLogo') + '" />');
+      $('#top').css('height', '60px');
+    } else {
+      $('#logo').css('display', 'none');
+      $('#header').css('padding-top', '25px');
+    }
 
     // Load tiles
     addBaseMap();
@@ -92,11 +104,20 @@ $(window).on('load', function() {
       }).addTo(map);
     }
 
-    var chapters = mapData.sheets(constants.chaptersSheetName).elements;
-
     var markers = [];
-    changeMarkerColor = function(n, from, to) {
-      markers[n]._icon.className = markers[n]._icon.className.replace(from, to);
+
+    var markActiveColor = function(k) {
+      /* Removes marker-active class from all markers */
+      for (var i = 0; i < markers.length; i++) {
+        if (markers[i] && markers[i]._icon) {
+          markers[i]._icon.className = markers[i]._icon.className.replace(' marker-active', '');
+
+          if (i == k) {
+            /* Adds marker-active class, which is orange, to marker k */
+            markers[k]._icon.className += ' marker-active';
+          }
+        }
+      }
     }
 
     var pixelsAbove = [];
@@ -104,6 +125,7 @@ $(window).on('load', function() {
 
     var currentlyInFocus; // integer to specify each chapter is currently in focus
     var overlay;  // URL of the overlay for in-focus chapter
+    var geoJsonOverlay;
 
     for (i in chapters) {
       var c = chapters[i];
@@ -112,13 +134,17 @@ $(window).on('load', function() {
         var lat = parseFloat(c['Latitude']);
         var lon = parseFloat(c['Longitude']);
 
+        chapterCount += 1;
+
         markers.push(
           L.marker([lat, lon], {
             icon: L.ExtraMarkers.icon({
               icon: 'fa-number',
-              number: ++chapterCount,
-              markerColor: 'blue'
-            })
+              number: c['Marker'] === 'Plain' ? '' : chapterCount,
+              markerColor: c['Marker Color'] || 'blue'
+            }),
+            opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
+            interactive: c['Marker'] === 'Hidden' ? false : true,
           }
         ));
 
@@ -138,15 +164,23 @@ $(window).on('load', function() {
       var mediaContainer = null;
 
       // Add media source
-      var source = $('<a>', {
+      var mediasource = $('<a>', {
         text: c['Media Credit'],
         href: c['Media Credit Link'],
         target: "_blank",
         class: 'source'
       });
 
-      // YouTube
-      if (c['Media Link'].indexOf('youtube.com/') > -1) {
+      var mediasourcemodal = $('<a>', {
+        text: c['Media Credit'],
+        href: c['Media Credit Link'],
+        target: "_blank",
+        class: 'modal_caption'
+      });
+
+
+          // YouTube
+      if (c['Media Link'] && c['Media Link'].indexOf('youtube.com/') > -1) {
         media = $('<iframe></iframe>', {
           src: c['Media Link'],
           width: '100%',
@@ -158,7 +192,7 @@ $(window).on('load', function() {
 
         mediaContainer = $('<div></div', {
           class: 'img-container'
-        }).append(media).after(source);
+        }).append(media).after(mediasource);
       }
 
       // If not YouTube: either audio or image
@@ -167,33 +201,83 @@ $(window).on('load', function() {
         'jpeg': 'img',
         'png': 'img',
         'mp3': 'audio',
+        'mp4': 'audio',
         'ogg': 'audio',
         'wav': 'audio',
       }
 
-      var mediaExt = c['Media Link'].split('.').pop();
+      var mediaExt = c['Media Link'].split('.').pop().toLowerCase();
       var mediaType = mediaTypes[mediaExt];
 
       if (mediaType) {
-        media = $('<' + mediaType + '>', {
-          src: c['Media Link'],
-          controls: mediaType == 'audio' ? 'controls' : '',
-        });
+       media = $('<' + mediaType + '>', {
+         src: c['Media Link'],
+         class: 'myImg',
+         alt: c['Media Credit'],
+         controls: mediaType == 'audio' ? 'controls' : '',
+       });
 
-        mediaContainer = $('<div></div', {
-          class: mediaType + '-container'
-        }).append(media).after(source);
-      }
+       mediaContainer = $('<div></div', {
+         class: mediaType + '-container'
+       }).append(media).after(mediasource);
+
+    }
 
       container
         .append('<p class="chapter-header">' + c['Chapter'] + '</p>')
         .append(media ? mediaContainer : '')
-        .append(media ? source : '')
+        .append(media ? mediasource : '')
         .append('<p class="description">' + c['Description'] + '</p>');
 
       $('#contents').append(container);
 
-    }
+      var modalcontainer = $('<div></div>', {
+          id: 'modalcontainer' + i,
+        });
+
+        span = $('<span class="close">'+ c['Span Element'] + '</span>');
+
+        modal = $('<' + mediaType + '>', {
+              src: c['Media Link'],
+              id: 'img01',
+              class: 'modal-content',
+              controls: mediaType == 'audio' ? 'controls' : '',
+              });
+
+        imgContainer = $('<div id="myModal" class="modal"></div',{
+            class: mediaType
+          }).append(span)
+          .append(modal)
+          .append(mediasourcemodal)
+          ;
+        $('#contents').append(imgContainer);
+
+        modalcontainer
+              .append(media ? imgContainer : '')
+            $('#contents').append(modalcontainer);
+
+        var modal = document.getElementById('myModal');
+        var span = document.getElementsByClassName("close")[0];
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+
+        var img = $('.myImg');
+        var modalImg = $("#img01");
+        var captionText = document.getElementById("caption");
+        $('.myImg').click(function(){
+          modal.style.display = "block";
+          var newSrc = this.src;
+          modalImg.attr('src', newSrc);
+
+        });
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        };
+
+
+
+      }
 
     changeAttribution();
 
@@ -221,30 +305,36 @@ $(window).on('load', function() {
         $('#title').css('opacity', 1 - Math.min(1, currentPosition / 100));
       }
 
-      for (i = 0; i < pixelsAbove.length - 1; i++) {
-        if (currentPosition >= pixelsAbove[i] && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin) && currentlyInFocus != i) {
+      for (var i = 0; i < pixelsAbove.length - 1; i++) {
+
+        if ( currentPosition >= pixelsAbove[i]
+          && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin)
+          && currentlyInFocus != i
+        ) {
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
           $('.chapter-container').removeClass("in-focus").addClass("out-focus");
           $('div#container' + i).addClass("in-focus").removeClass("out-focus");
 
           currentlyInFocus = i;
-
-          for (k = 3; k < pixelsAbove.length - 2; k++) {
-            changeMarkerColor(k, 'orange', 'blue');
-          }
-
-          changeMarkerColor(i, 'blue', 'orange');
+          markActiveColor(currentlyInFocus);
 
           // Remove overlay tile layer if needed
           if (map.hasLayer(overlay)) {
             map.removeLayer(overlay);
           }
 
+          // Remove GeoJson Overlay tile layer if needed
+          if (map.hasLayer(geoJsonOverlay)) {
+            map.removeLayer(geoJsonOverlay);
+          }
+
+          var c = chapters[i];
+
           // Add chapter's overlay tiles if specified in options
-          if (chapters[i]['Overlay'] != '') {
-            var opacity = (chapters[i]['Overlay Transparency'] != '') ? parseFloat(chapters[i]['Overlay Transparency']) : 1;
-            var url = chapters[i]['Overlay'];
+          if (c['Overlay']) {
+            var opacity = (c['Overlay Transparency'] !== '') ? parseFloat(c['Overlay Transparency']) : 1;
+            var url = c['Overlay'];
 
             if (url.split('.').pop() == 'geojson') {
               $.getJSON(url, function(geojson) {
@@ -261,15 +351,45 @@ $(window).on('load', function() {
                 }).addTo(map);
               });
             } else {
-              overlay = L.tileLayer(chapters[i]['Overlay'], {opacity: opacity}).addTo(map);
+              overlay = L.tileLayer(c['Overlay'], {opacity: opacity}).addTo(map);
             }
 
           }
 
+          if (c['GeoJSON Overlay']) {
+            $.getJSON(c['GeoJSON Overlay'], function(geojson) {
+
+              // Parse properties string into a JS object
+              var props = {};
+
+              if (c['GeoJSON Feature Properties']) {
+                var propsArray = c['GeoJSON Feature Properties'].split(';');
+                var props = {};
+                for (var p in propsArray) {
+                  if (propsArray[p].split(':').length === 2) {
+                    props[ propsArray[p].split(':')[0].trim() ] = propsArray[p].split(':')[1].trim();
+                  }
+                }
+              }
+
+              geoJsonOverlay = L.geoJson(geojson, {
+                style: function(feature) {
+                  return {
+                    fillColor: feature.properties.COLOR || props.fillColor || 'white',
+                    weight: props.weight || 1,
+                    opacity: props.opacity || 0.5,
+                    color: feature.properties.COLOR || props.color || 'silver',
+                    fillOpacity: props.fillOpacity || 0.5,
+                  }
+                }
+              }).addTo(map);
+            });
+          }
+
           // Fly to the new marker destination if latitude and longitude exist
-          if (chapters[i]['Latitude'] && chapters[i]['Longitude']) {
-            var zoom = chapters[i]['Zoom'] ? chapters[i]['Zoom'] : CHAPTER_ZOOM;
-            map.flyTo([chapters[i]['Latitude'], chapters[i]['Longitude']], zoom);
+          if (c['Latitude'] && c['Longitude']) {
+            var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
+            map.flyTo([c['Latitude'], c['Longitude']], zoom);
           }
 
           // No need to iterate through the following chapters
@@ -341,10 +461,13 @@ $(window).on('load', function() {
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'View <a href="' + googleDocURL + '" target="_blank">data</a>';
+    var credit = 'View <a href="'
+      // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
+      + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
+      + '" target="_blank">data</a>';
+
     var name = getSetting('_authorName');
     var url = getSetting('_authorURL');
-
 
     if (name && url) {
       if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
@@ -357,12 +480,8 @@ $(window).on('load', function() {
 
     credit += 'View <a href="' + getSetting('_githubRepo') + '">code</a>';
     if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
-    credit += ' | ';
+    credit += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
-
-
   }
-
-
 
 });
