@@ -265,14 +265,21 @@ $(window).on('load', function() {
         var modalImg = $("#img01");
         var captionText = document.getElementById("caption");
         $('.myImg').click(function(){
-          modal.style.display = "block";
-          var newSrc = this.src;
-          modalImg.attr('src', newSrc);
-
+            if ($(window).width() >=768 ) {
+                modal.style.display = "block";
+                var newSrc = this.src;
+                var newCaption = $( this ).parent().next().text();
+                var newCaptionLink = $( this ).parent().next().attr('href');
+                $("#title").css('visibility','hidden');
+                modalImg.attr('src', newSrc);
+                modalImg.next().text(newCaption);
+                modalImg.next().attr('href',newCaptionLink);
+            }
         });
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
           modal.style.display = "none";
+          $("#title").css('visibility','visible');
         };
 
 
