@@ -88,7 +88,7 @@ $(window).on('load', function() {
 
     // Add logo
     if (getSetting('_mapLogo')) {
-      $('#header').append('<img src="' + getSetting('_mapLogo') + '" />')
+      $('#header').append('<img clas="logo" src="' + getSetting('_mapLogo') + '" />')
       //$('#logo').append('<img src="' + getSetting('_mapLogo') + '" />');
       $('#top').css('height', '80px');
     } else {
