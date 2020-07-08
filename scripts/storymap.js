@@ -88,11 +88,11 @@ $(window).on('load', function() {
 
     // Add logo
     if (getSetting('_mapLogo')) {
-      $('#header').append('<img clas="logo" src="' + getSetting('_mapLogo') + '" />')
+      $('#header').append('<img class="logo" src="' + getSetting('_mapLogo') + '" />')
       //$('#logo').append('<img src="' + getSetting('_mapLogo') + '" />');
       $('#top').css('height', '80px');
     } else {
-      $('#logo').css('display', 'none');
+      $('.logo').css('display', 'none');
       //$('#header').css('padding-top', '25px');
     }
 
