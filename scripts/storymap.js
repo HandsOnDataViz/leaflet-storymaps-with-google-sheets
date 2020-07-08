@@ -496,7 +496,7 @@ $(window).on('load', function() {
       if (weburl.indexOf('@') > 0) { url = 'mailto:' + weburl; }
       credit += ' Digital Project Support by: <a href="' + weburl + '">' + web + '</a>';
     };
-    if (getSetting('_codeCredit')) credit += 'Original Code by ' + getSetting('_codeCredit') + ' | ';
+    if (getSetting('_codeCredit')) credit += 'Original Code by ' + getSetting('_codeCredit');
     credit += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
