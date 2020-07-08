@@ -473,7 +473,7 @@ $(window).on('load', function() {
     var credit = 'View <a href="'
       // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
       + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
-      + '" target="_blank">data</a>';
+      + '" target="_blank">data by</a>';
 
     var name = getSetting('_authorName');
     var web = getSetting('_webDeveloper')
@@ -489,7 +489,7 @@ $(window).on('load', function() {
     }
 
 
-    if (getSetting('_githubRepo')) credit += ' by ' + getSetting('_webDeveloper');
+    if (getSetting('_githubRepo')) credit += ' by ' + getSetting('_githubRepo');
     if (getSetting('_webDeveloper')) credit += ' by ' + getSetting('_webDeveloper');
     if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
     credit += ' with ';
