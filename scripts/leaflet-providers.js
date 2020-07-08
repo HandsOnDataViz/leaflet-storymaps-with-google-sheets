@@ -220,7 +220,7 @@
 			options: {
 				attribution:
 					'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; ' +
-					'Map data {attribution.OpenStreetMap}',
+					'{attribution.OpenStreetMap}',
 				subdomains: 'abcd'
 			}
 		},
