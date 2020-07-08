@@ -488,7 +488,7 @@ $(window).on('load', function() {
       author += ' | ';
     }
 
-    author += '<a href="' + getSetting('_webDeveloper') + '">Web Development Assistant: </a>';
+    //author += '<a href="' + getSetting('_webDeveloper') + '">Web Development Assistant: </a>';
     author += '<a href="' + getSetting('_githubRepo') + '">GitHub Repo: </a>';
     if (getSetting('_codeCredit')) author += ' by ' + getSetting('_codeCredit');
     author += ' with ';
