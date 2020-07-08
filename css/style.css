@@ -243,7 +243,7 @@ a.modal_caption, a.modal_caption:visited {
   background-position: -72px 0 !important;
 }
 
-#logo {
+/*#logo {
   height: 30px;
   line-height: 30px;
   text-align: center;
@@ -256,7 +256,7 @@ a.modal_caption, a.modal_caption:visited {
   max-width: 100%;
   vertical-align: middle;
 
-}
+}*/
 
 img.logo {
   max-height: 100%;
