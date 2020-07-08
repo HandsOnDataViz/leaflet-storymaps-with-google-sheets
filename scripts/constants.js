@@ -5,9 +5,10 @@ var constants = {
   _mapLogo: 'Storymap Logo',
   // Credits
 	_authorName: 'Author Name',
+  _webDeveloper: 'Web Development Assitant',
 	_authorURL: 'Author Email or Website',
   _codeCredit: 'Code Credit',
-	_githubRepo: 'Author GitHub Repo Link',
+	_githubRepo: 'GitHub Repo',
 	// Map Settings
 	_tileProvider: 'Basemap Tiles',
 	_zoomControls: 'Zoom Controls',

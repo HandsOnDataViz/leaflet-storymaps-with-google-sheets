@@ -476,6 +476,7 @@ $(window).on('load', function() {
       + '" target="_blank">data</a>';
 
     var name = getSetting('_authorName');
+    var web = getSetting('_webDeveloper')
     var url = getSetting('_authorURL');
 
     if (name && url) {
@@ -487,7 +488,15 @@ $(window).on('load', function() {
       credit += ' | ';
     }
 
-    credit += 'View <a href="' + getSetting('_githubRepo') + '">code</a>';
+    if (web) {
+      credit += ' by <a href="' + url + '">' + name + '</a> | ';
+    } else if (name) {
+      credit += ' by ' + name + ' | ';
+    } else {
+      credit += ' | ';
+    }
+
+    credit += 'View <a href="' + getSetting('_githubRepo') + '">GitHub Repo</a>';
     if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
     credit += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
