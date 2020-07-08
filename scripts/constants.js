@@ -5,7 +5,7 @@ var constants = {
   _mapLogo: 'Storymap Logo',
   // Credits
 	_authorName: 'Author Name',
-  _webDeveloper: 'Web Development Assitant',
+  _webDeveloper: 'Web Development Assistant',
 	_authorURL: 'Author Email or Website',
   _codeCredit: 'Code Credit',
 	_githubRepo: 'GitHub Repo',
