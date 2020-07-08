@@ -489,9 +489,9 @@ $(window).on('load', function() {
     }
 
 
-    if (getSetting('_githubRepo')) credit += ' by ' + getSetting('_githubRepo');
-    if (getSetting('_webDeveloper')) credit += ' by ' + getSetting('_webDeveloper');
-    if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
+    if (getSetting('_githubRepo')) credit += ' GitHub Repo: ' + getSetting('_githubRepo');
+    if (getSetting('_webDeveloper')) credit += 'Project Support by ' + getSetting('_webDeveloper');
+    if (getSetting('_codeCredit')) credit += 'Code by ' + getSetting('_codeCredit');
     credit += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
