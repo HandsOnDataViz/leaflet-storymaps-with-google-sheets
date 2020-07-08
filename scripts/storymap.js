@@ -470,10 +470,10 @@ $(window).on('load', function() {
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'View <a href="'
+    var author = 'Map data <a href="'
       // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
       + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
-      + '" target="_blank">data</a>';
+      + '" target="_blank">authored by</a>';
 
     var name = getSetting('_authorName');
     var web = getSetting('_webDeveloper')
@@ -481,24 +481,17 @@ $(window).on('load', function() {
 
     if (name && url) {
       if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
-      credit += ' by <a href="' + url + '">' + name + '</a> | ';
+      author += ' by <a href="' + url + '">' + name + '</a> | ';
     } else if (name) {
-      credit += ' by ' + name + ' | ';
+      author += ' by ' + name + ' | ';
     } else {
-      credit += ' | ';
+      author += ' | ';
     }
 
-    if (web) {
-      credit += ' by <a href="' + url + '">' + name + '</a> | ';
-    } else if (name) {
-      credit += ' by ' + name + ' | ';
-    } else {
-      credit += ' | ';
-    }
-
-    credit += 'View <a href="' + getSetting('_githubRepo') + '">GitHub Repo</a>';
-    if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
-    credit += ' with ';
+    author += '<a href="' + getSetting('_webDeveloper') + '">Web Development Assistant: </a>';
+    author += '<a href="' + getSetting('_githubRepo') + '">GitHub Repo: </a>';
+    if (getSetting('_codeCredit')) author += ' by ' + getSetting('_codeCredit');
+    author += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
 
