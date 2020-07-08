@@ -258,7 +258,7 @@ a.modal_caption, a.modal_caption:visited {
 
 }
 
-img .logo {
+img.logo {
   max-height: 100%;
   max-width: 100%;
   vertical-align: middle;
