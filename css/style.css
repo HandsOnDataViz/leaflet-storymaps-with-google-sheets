@@ -1,7 +1,7 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Optima", georgia;
+  font-family: "Noto Sans", "Optima";
   overflow: hidden;
 }
 
@@ -263,6 +263,7 @@ img.logo {
   max-width: 100%;
   vertical-align: middle;
   height: 80px;
+  padding: 30px;
 
 }
 
