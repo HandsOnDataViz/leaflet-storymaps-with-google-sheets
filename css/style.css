@@ -100,7 +100,9 @@ body {
   display: block;
   text-align: center;
   font-size: 1.2em;
+  font-weight: bold;
   padding: 0 5px;
+
 }
 
 .source {
