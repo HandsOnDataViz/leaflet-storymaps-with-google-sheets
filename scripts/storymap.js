@@ -480,18 +480,22 @@ $(window).on('load', function() {
     var url = getSetting('_authorURL');
 
     if (name && url) {
-      //if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
+      if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
       credit += ' <a href="' + url + '">' + name + '</a> | ';
+      credit += ' <a href="' + url + '">' + web + '</a> | ';
     } else if (name) {
       credit += ' by ' + name + ' | ';
-    } else {
+    } else if (web) {
+      credit +=  web + ' | ';
+    }
+      else {
       credit += ' | ';
     }
 
-
+    if (getSetting('projectWebsite')) credit += ' Project website: ' + getSetting('projectWebsite') + ' | ';
     if (getSetting('_githubRepo')) credit += ' GitHub Repo: ' + getSetting('_githubRepo') + ' | ';
-    if (getSetting('_webDeveloper')) credit += 'Project Support by ' + getSetting('_webDeveloper') + ' | ';
-    if (getSetting('_codeCredit')) credit += 'Code by ' + getSetting('_codeCredit') + ' | ';
+    if (getSetting('_webDeveloper')) credit += 'Web Development & Digital Project Support by: ' + getSetting('_webDeveloper') + ' | ';
+    if (getSetting('_codeCredit')) credit += 'Original Code by ' + getSetting('_codeCredit') + ' | ';
     credit += ' | ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
