@@ -470,21 +470,22 @@ $(window).on('load', function() {
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'View map <a href="'
-      // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
-      + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
-      + '" target="_blank">data:</a> by: ';
-
 
     var name = getSetting('_authorName');
     var web = getSetting('_webDeveloper')
     var url = getSetting('_authorURL');
 
-    if (name && url) {
+    var credit = 'Project website: <a href="' + getSetting('_authorURL')
+      // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
+      //+ (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
+      + '" target="_blank">' + url + '</a>';
+
+
+    if (name) {
       if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
-      credit += ' by <a href="' + url + '">' + name + '</a> | ';
+      credit += ' <a href="' + url + '">' + name + '</a> | ';
     } else if (name) {
-      credit += ' by ' + name + ' | ';
+      credit += ' Author: ' + name + ' | ';
     } else {
       credit += ' | ';
     }
