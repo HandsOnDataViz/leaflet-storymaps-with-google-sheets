@@ -88,7 +88,7 @@ $(window).on('load', function() {
 
     // Add logo
     if (getSetting('_mapLogo')) {
-      $('#header').append('<a href="https://vernacularmemory.org/"><img class="logo" src="' + getSetting('_mapLogo') + '" /></a>')
+      $('#header').append('<a href="https://kensingtonremembers.org/"><img class="logo" src="' + getSetting('_mapLogo') + '" /></a>')
       //$('#logo').append('<img src="' + getSetting('_mapLogo') + '" />');
       $('#top').css('height', '80px');
     } else {
