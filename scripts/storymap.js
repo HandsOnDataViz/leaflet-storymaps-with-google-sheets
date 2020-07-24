@@ -414,6 +414,10 @@ $(window).on('load', function() {
           <i class='fa fa-chevron-up'></i></br> \
           <small>Top</small>  \
         </a> \
+        <a href='https://kensingtonremembers.org/'>
+          <i class='fa fa-chevron-up'></i></br> \
+          <small>Back to Kensington Remembers</small>  \
+        </a> \
       </div> \
     ");
 
