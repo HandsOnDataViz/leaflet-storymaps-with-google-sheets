@@ -28,7 +28,7 @@ $(window).on('load', function() {
       $.get('csv/Chapters.csv', function(chapters) {
         initMap(
           $.csv.toObjects(options),
-          $.csv.toObjects(chapters),
+          $.csv.toObjects(chapters)
         )
       }).fail(function(e) { alert('Could not read Chapters.csv') });
     }).fail(function(e) { alert('Could not read Options.csv') })
