@@ -101,8 +101,8 @@ $(window).on('load', function() {
     var chapterContainerMargin = 70;
 
     document.title = getSetting('_mapTitle');
-    $('#header').append('<h1>' + getSetting('_mapTitle') + '</h1>');
-    $('#header').append('<h2>' + getSetting('_mapSubtitle') + '</h2>');
+    $('#header').append('<h1>' + (getSetting('_mapTitle') || '') + '</h1>');
+    $('#header').append('<h2>' + (getSetting('_mapSubtitle') || '') + '</h2>');
 
     // Add logo
     if (getSetting('_mapLogo')) {
@@ -224,7 +224,7 @@ $(window).on('load', function() {
         'wav': 'audio',
       }
 
-      var mediaExt = c['Media Link'].split('.').pop().toLowerCase();
+      var mediaExt = c['Media Link'] ? c['Media Link'].split('.').pop().toLowerCase() : '';
       var mediaType = mediaTypes[mediaExt];
 
       if (mediaType) {
