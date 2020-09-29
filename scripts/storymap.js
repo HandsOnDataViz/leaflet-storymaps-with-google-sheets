@@ -422,6 +422,22 @@ $(window).on('load', function() {
 
     $('div#container0').addClass("in-focus");
     $('div#contents').animate({scrollTop: '1px'});
+
+
+    // Add Google Analytics if the ID exists
+    var ga = getSetting('_googleAnalytics');
+    if ( ga && ga.length >= 10 ) {
+      var gaScript = document.createElement('script');
+      gaScript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=' + ga);
+      document.head.appendChild(gaScript);
+  
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', ga);
+    }
+
+
   }
 
 
