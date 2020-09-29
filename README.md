@@ -1,13 +1,17 @@
-## Live Demo
-https://jhsgh.github.io/storymap/
+# Leaflet Storymaps with Google Sheets
+Customize your Leaflet story map with linked Google Sheets template and scrolling narrative.
+Supports images, audio and video embeddings, and Leaflet TileLayer/geojson overlays.
 
-## Google Sheets template 
-https://docs.google.com/spreadsheets/d/12GRaDtQJwPyjIQjPgB1L-z9jgGBkkywESuWv8njgbEQ/edit#gid=0
+<p align="center">
+  <img src="./leaflet-storymaps-demo.gif" title="Storymaps demo" />
+</p>
+
+## Live links (replace with your own)
+- Leaflet Map https://handsondataviz.github.io/leaflet-storymaps-with-google-sheets/
+- The map is hosted by GitHub and can be found at https://handsondataviz.github.io/leaflet-storymaps-with-google-sheets/
+- Google Sheets template https://docs.google.com/spreadsheets/d/1AO6XHL_0JafWZF4KEejkdDNqfuZWUk3SlNlQ6MjlRFM/edit#gid=0
 
 ## Create Your Own
-<<<<<<< Updated upstream
-See step-by-step tutorial in *Data Visualization for All* https://datavizforall.org/leaflet-storymaps-with-google-sheets.html
-=======
 - See step-by-step tutorial in *Hands-On Data Visualization* https://HandsOnDataViz.org/leaflet-storymaps-with-google-sheets.html
 
 #### Geocode your address data with Google Sheets add-on
@@ -38,11 +42,11 @@ OR
 
 Option B: If you originally "forked" a copy of our code, create a GitHub "pull request" to update your repo with our code revisions.
 
-Advice: We recommend this option only if you understand (or are willing to learn about) GitHub pull requests, and can deal with 
+Advice: We recommend this option only if you understand (or are willing to learn about) GitHub pull requests, and can deal with
 Warning: Since this operation might overwrite some of your code, go to *Code > Download ZIP* to make a backup to your local computer.
 1. Log into the web interface fo your GitHub storymap repository.
 2. Click *Pull requests* and click the green button for a *New pull request*.
-3. On the *Comparing Changes* page, use the menus to pull code *into* your repo *from* the original repo, named HandsOnDataViz/leaflet-storymaps-with-google-sheets. GitHub may warn that you cannot automatically merge the files, but proceed anyways. 
+3. On the *Comparing Changes* page, use the menus to pull code *into* your repo *from* the original repo, named HandsOnDataViz/leaflet-storymaps-with-google-sheets. GitHub may warn that you cannot automatically merge the files, but proceed anyways.
 4. You may need to click the *Resolve conflicts* button on the next screen to .... CONTINUE HERE
 
 OR
@@ -67,4 +71,3 @@ We use [Google Sheets API version 4](https://developers.google.com/sheets/api), 
 - Leaflet.ExtraMarkers (v1.0.5) https://github.com/coryasilva/Leaflet.ExtraMarkers (MIT)
 - jQuery-CSV (v1.0.11) https://github.com/evanplaice/jquery-csv (MIT)
 - Single Element CSS Spinner (31 May 2016) https://github.com/lukehaas/css-loaders (MIT)
->>>>>>> Stashed changes
