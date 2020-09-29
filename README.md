@@ -26,9 +26,9 @@ To geocode (find latitude and longitude coordinates), we recommend installing th
 See more in the tutorial https://handsondataviz.org/leaflet-storymaps-with-google-sheets.html
 
 ## Problem: The map I created here before September 2020 is not working
-Google Sheets changed its API from version 3 to version 4 after Sept 30th 2020, which breaks prior versions of the map, so we made several updates to the code. To make your pre-Sept 2020 maps work again, here are four options, A-B-C-D:
+Google Sheets changed its API from version 3 to version 4 after Sept 30th 2020, which will break versions of the map made prior to this date. We also made several updates to the code, including adding a Google Sheets API key that's necessary to use version 4. To make your pre-Sept 2020 maps work again, here are four options, A-B-C-D:
 
-Option A: Use your existing code and pull your data from CSV files rather than the linked Google Sheet.
+Option A: Use your existing code and pull your data from CSV files rather than the linked Google Sheet. This avoids the Google Sheets API key issue, but does not take advantage of other code updates we made.
 
 1. Go to your linked Google Sheet, and for each tab, *File > Download* in CSV format, and rename them this way: Chapters.csv, Options.csv.
 2. Log into the web interface of your GitHub storymap repository.
@@ -39,18 +39,18 @@ Now the code automatically searches for data in your CSV folder, rather than you
 
 OR
 
-Option B: If you originally "forked" a copy of our code, create a GitHub "pull request" to update your repo with our code revisions.
+Option B: If you originally "forked" a copy of our code, create a GitHub "pull request" to update your repo with our code revisions, including the Google Sheets API key.
 
-Advice: We recommend this option only if you understand (or are willing to learn about) GitHub pull requests, and can deal with
+Advice: We recommend this option only if you understand (or are willing to learn about) GitHub pull requests, and can deal with resolving conflicts between your code and our updated code. 
 Warning: Since this operation might overwrite some of your code, go to *Code > Download ZIP* to make a backup to your local computer.
 1. Log into the web interface fo your GitHub storymap repository.
 2. Click *Pull requests* and click the green button for a *New pull request*.
 3. On the *Comparing Changes* page, use the menus to pull code *into* your repo *from* the original repo, named HandsOnDataViz/leaflet-storymaps-with-google-sheets. GitHub may warn that you cannot automatically merge the files, but proceed anyways.
-4. You may need to click the *Resolve conflicts* button on the next screen to .... CONTINUE HERE
+4. You may need to click the *Resolve conflicts* button on the next screen, which means you need to sort out which portions of your code to keep and which portions of our code to accept. Generally speaking, you should accept our updates for index.html, style.css, and most scripts.js, while keeping your own content for README.md, media, and geojson folder content. In the google-doc-url.js file, you should keep your own Google Sheet ID, but temporarily add our Google Sheets API key until you create your own. In GitHub, you can resolve code conflicts by deleting/keeping lines in specific files.
 
 OR
 
-Option C: Use GitHub Desktop to move copies of the newer code (index.html, scripts folder, etc.) into your repo via your local computer.
+Option C: Use GitHub Desktop to move copies of the newer code (index.html, scripts folder, etc.) into your repo via your local computer. Make sure you copy and paste the Google Sheets API key that appears in the lower half of the google-doc-url.js file, but keep your own Google Sheets ID in the upper half.
 
 OR
 
