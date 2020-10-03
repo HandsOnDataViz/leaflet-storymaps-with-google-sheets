@@ -25,16 +25,16 @@ To geocode (find latitude and longitude coordinates), we recommend installing th
 
 See more in the tutorial https://handsondataviz.org/leaflet-storymaps-with-google-sheets.html
 
-## Problem: The map I created before September 2020 is not working
-Google Sheets changed its API from version 3 to version 4 after Sept 30th 2020, which will break versions of the map made prior to this date. We also made several updates to the code, including adding a Google Sheets API key that's necessary to use version 4. To make your pre-Sept 2020 maps work again, here are three options, A-B-C:
+## Update your code for any pre-October 2020 storymaps before January 2021
+If you used our code to create a storymap prior to October 2020, you will need to update your version before January 26, 2021 for it to continue to work. Google announced that it will [migrate from Google Sheets API v3 to v4 in Jan 2021](https://developers.google.com/sheets/api/v3), and we released our update of Leaflet storymaps code v1.2 on September 29th to address Google's changes.
+
+Three options to update your code:
 
 Option A: If you understand (or are willing to learn about) [GitHub Desktop](https://handsondataviz.org/github-desktop-atom.html), use it to move copies of the newer code (index.html, scripts folder, markers folder, style.css, etc.) into your repo via your local computer. In the `google-doc-url.js` file, copy and paste the Google Sheets API key that appears in the lower half of our code, but keep your own Google Sheets ID that appears in the upper-half of your code.
 
 OR
 
-Option B: If you originally "forked" a copy of our code, create a GitHub "pull request" to update your repo with our code revisions, including the Google Sheets API key.
-
-Advice: We recommend this option only if you understand (or are willing to learn about) GitHub pull requests, and can deal with resolving conflicts between your code and our updated code.
+Option B: If you originally "forked" a copy of our code, create a GitHub "pull request" to update your repo with our code revisions, including the Google Sheets API key. We recommend this option only if you understand (or are willing to learn about) GitHub pull requests, and can deal with resolving conflicts between your code and our updated code.
 Warning: Since this operation might overwrite some of your code, go to *Code > Download ZIP* to make a backup to your local computer.
 1. Log into the web interface of your GitHub storymap repository.
 2. Click *Pull requests* and click the green button for a *New pull request*.
@@ -45,7 +45,7 @@ OR
 
 Option C: Start over with a brand-new repo, and migrate your existing map content. Make a copy of our newer code by clicking the green 'Use template' button. Migrate any media folder or geodata folder content from your old repo to your new repo, by downloading to your local computer and uploading to GitHub. Reconnect your Google Sheet ID to the `google-doc-url.js` file in your new repo.
 
-Email us at [HandsOnDataViz@gmail.com](handsondataviz@gmail.com) if you cannot solve an update problem
+Email us at [HandsOnDataViz@gmail.com](handsondataviz@gmail.com) if you need assistance with updating your code.
 
 ## Credits (and licenses)
 Developed by [Ilya Ilyankou](https://github.com/ilyankou) and [Jack Dougherty](https://github.com/jackdougherty) with support from Trinity College, CT. Inspired by Code for Atlanta mapsfor.us (2016) https://github.com/codeforatlanta/mapsforus (BSD-3-Clause). Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100, see http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html.
