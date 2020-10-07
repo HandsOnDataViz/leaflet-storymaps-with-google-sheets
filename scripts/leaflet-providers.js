@@ -216,11 +216,11 @@
 			}
 		},
 		MapBox: {
-			url: '//api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+			url: 'https://api.mapbox.com/styles/v1/dr-c/ckc6hgwxx111z1intlp2qo7ww/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZHItYyIsImEiOiJja2MyMnF2bzYwMDg5MnFwN2o5bTFicTQ0In0.6BoyTjfVF6UN6w2gbRMi_g',
 			options: {
 				attribution:
 					'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; ' +
-					'Map data {attribution.OpenStreetMap}',
+					'{attribution.OpenStreetMap}',
 				subdomains: 'abcd'
 			}
 		},
