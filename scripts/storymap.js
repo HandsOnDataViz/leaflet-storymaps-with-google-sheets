@@ -302,25 +302,26 @@ $(window).on('load', function() {
 
           // Add chapter's overlay tiles if specified in options
           if (c['Overlay']) {
-            var opacity = (c['Overlay Transparency'] !== '') ? parseFloat(c['Overlay Transparency']) : 1;
+
+            var opacity = parseFloat(c['Overlay Transparency']) || 1;
             var url = c['Overlay'];
 
-            if (url.split('.').pop() == 'geojson') {
+            if (url.split('.').pop() === 'geojson') {
               $.getJSON(url, function(geojson) {
                 overlay = L.geoJson(geojson, {
                   style: function(feature) {
                     return {
-                      fillColor: feature.properties.COLOR,
-                      weight: 1,
-                      opacity: 0.5,
-                      color: feature.properties.COLOR,
-                      fillOpacity: 0.5,
+                      fillColor: feature.properties.fillColor || '#ffffff',
+                      weight: feature.properties.weight || 1,
+                      opacity: feature.properties.opacity || opacity,
+                      color: feature.properties.color || '#cccccc',
+                      fillOpacity: feature.properties.fillOpacity || 0.5,
                     }
                   }
                 }).addTo(map);
               });
             } else {
-              overlay = L.tileLayer(c['Overlay'], {opacity: opacity}).addTo(map);
+              overlay = L.tileLayer(c['Overlay'], { opacity: opacity }).addTo(map);
             }
 
           }
@@ -344,11 +345,11 @@ $(window).on('load', function() {
               geoJsonOverlay = L.geoJson(geojson, {
                 style: function(feature) {
                   return {
-                    fillColor: feature.properties.COLOR || props.fillColor || 'white',
-                    weight: props.weight || 1,
-                    opacity: props.opacity || 0.5,
-                    color: feature.properties.COLOR || props.color || 'silver',
-                    fillOpacity: props.fillOpacity || 0.5,
+                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
+                    weight: feature.properties.weight || props.weight || 1,
+                    opacity: feature.properties.opacity || props.opacity || 0.5,
+                    color: feature.properties.color || props.color || '#cccccc',
+                    fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5,
                   }
                 }
               }).addTo(map);
