@@ -18,5 +18,6 @@ var constants = {
   _narrativeText: 'Narrative Text Color',
   _narrativeActive: 'Active Chapter Background Color',
   _narrativeLink: 'Narrative Link Color',
-  _googleAnalytics: 'Google Analytics Tracking ID'
+  _googleAnalytics: 'Google Analytics Tracking ID',
+  _enableLightbox: 'Enable Lightbox for Images'
 };

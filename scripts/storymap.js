@@ -4,12 +4,6 @@ $(window).on('load', function() {
   // Some constants, such as default settings
   const CHAPTER_ZOOM = 15;
 
-  // This watches for the scrollable container
-  var scrollPosition = 0;
-  $('div#contents').scroll(function() {
-    scrollPosition = $(this).scrollTop();
-  });
-
   // First, try reading Options.csv
   $.get('csv/Options.csv', function(options) {
 
@@ -219,6 +213,8 @@ $(window).on('load', function() {
         'jpg': 'img',
         'jpeg': 'img',
         'png': 'img',
+        'tiff': 'img',
+        'gif': 'img',
         'mp3': 'audio',
         'ogg': 'audio',
         'wav': 'audio',
@@ -230,8 +226,20 @@ $(window).on('load', function() {
       if (mediaType) {
         media = $('<' + mediaType + '>', {
           src: c['Media Link'],
-          controls: mediaType == 'audio' ? 'controls' : '',
+          controls: mediaType === 'audio' ? 'controls' : '',
+          alt: c['Chapter']
         });
+
+        var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
+        if (enableLightbox && mediaType === 'img') {
+          var lightboxWrapper = $('<a></a>', {
+            'data-lightbox': c['Media Link'],
+            'href': c['Media Link'],
+            'data-title': c['Chapter'],
+            'data-alt': c['Chapter'],
+          });
+          media = lightboxWrapper.append(media);
+        }
 
         mediaContainer = $('<div></div', {
           class: mediaType + '-container'

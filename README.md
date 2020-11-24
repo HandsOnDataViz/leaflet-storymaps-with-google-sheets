@@ -61,3 +61,4 @@ We use [Google Sheets API version 4](https://developers.google.com/sheets/api), 
 - Leaflet.ExtraMarkers (v1.0.5) https://github.com/coryasilva/Leaflet.ExtraMarkers (MIT)
 - jQuery-CSV (v1.0.11) https://github.com/evanplaice/jquery-csv (MIT)
 - Single Element CSS Spinner (31 May 2016) https://github.com/lukehaas/css-loaders (MIT)
+- Lightbox by Lokesh Dhakar (v.2.11.3) https://github.com/lokesh/lightbox2 (MIT)
