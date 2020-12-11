@@ -11,7 +11,7 @@ function initMap() {
 
   // optional : customize link to view source code; add your own GitHub repository
   map.attributionControl
-  .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-storymap">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+  .setPrefix('View <a href="https://github.com/Dbill25/leaflet-storymap">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
   // optional: add legend to toggle any baselayers and/or overlays
   // global variable with (null, null) allows indiv layers to be added inside functions below
