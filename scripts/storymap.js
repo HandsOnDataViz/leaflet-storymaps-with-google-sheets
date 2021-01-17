@@ -288,6 +288,10 @@ $(window).on('load', function() {
           && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin)
           && currentlyInFocus != i
         ) {
+
+          // Update URL hash
+          location.hash = i;
+
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
           $('.chapter-container').removeClass("in-focus").addClass("out-focus");
@@ -432,6 +436,13 @@ $(window).on('load', function() {
     $('div#container0').addClass("in-focus");
     $('div#contents').animate({scrollTop: '1px'});
 
+    // On first load, check hash and if it contains an number, scroll down
+    if (parseInt(location.hash.substr(1))) {
+      var containerId = parseInt( location.hash.substr(1) );
+      $('#contents').animate({
+        scrollTop: $('#container' + containerId).offset().top
+      }, 2000);
+    }
 
     // Add Google Analytics if the ID exists
     var ga = getSetting('_googleAnalytics');
