@@ -20,22 +20,22 @@ $(window).on('load', function() {
     var parse = function(res) {
       return Papa.parse(Papa.unparse(res[0].values), {header: true} ).data;
     }
-  
+
     // First, try reading data from the Google Sheet
     if (typeof googleDocURL !== 'undefined' && googleDocURL) {
-  
+
       if (typeof googleApiKey !== 'undefined' && googleApiKey) {
-  
+
         var apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/'
         var spreadsheetId = googleDocURL.split('/d/')[1].split('/')[0];
-  
+
         $.when(
           $.getJSON(apiUrl + spreadsheetId + '/values/Options?key=' + googleApiKey),
           $.getJSON(apiUrl + spreadsheetId + '/values/Chapters?key=' + googleApiKey),
         ).then(function(options, chapters) {
           initMap(parse(options), parse(chapters))
         })
-  
+
       } else {
         alert('You load data from a Google Sheet, you need to add a free Google API key')
       }
@@ -43,7 +43,7 @@ $(window).on('load', function() {
     } else {
       alert('You need to specify a valid Google Sheet (googleDocURL)')
     }
-  
+
   })
 
 
@@ -283,7 +283,7 @@ $(window).on('load', function() {
       }
 
       for (var i = 0; i < pixelsAbove.length - 1; i++) {
-        
+
         if ( currentPosition >= pixelsAbove[i]
           && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin)
           && currentlyInFocus != i
@@ -371,7 +371,10 @@ $(window).on('load', function() {
           // Fly to the new marker destination if latitude and longitude exist
           if (c['Latitude'] && c['Longitude']) {
             var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
-            map.flyTo([c['Latitude'], c['Longitude']], zoom);
+            map.flyTo([c['Latitude'], c['Longitude']], zoom, {
+              animate: true,
+              duration: 2, // default is 2 seconds
+            });
           }
 
           // No need to iterate through the following chapters
@@ -450,7 +453,7 @@ $(window).on('load', function() {
       var gaScript = document.createElement('script');
       gaScript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=' + ga);
       document.head.appendChild(gaScript);
-  
+
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -470,7 +473,7 @@ $(window).on('load', function() {
       // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
       + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
       + '" target="_blank">data</a>';
-    
+
     var name = getSetting('_authorName');
     var url = getSetting('_authorURL');
 
