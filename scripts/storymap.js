@@ -203,7 +203,7 @@ $(window).on('load', function() {
           allowfullscreen: 'allowfullscreen',
         });
 
-        mediaContainer = $('<div></div', {
+        mediaContainer = $('<div></div>', {
           class: 'img-container'
         }).append(media).after(source);
       }
