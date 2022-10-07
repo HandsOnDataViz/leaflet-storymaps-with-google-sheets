@@ -153,7 +153,7 @@ $(window).on('load', function() {
           L.marker([lat, lon], {
             icon: L.ExtraMarkers.icon({
               icon: 'fa-number',
-              number: (c['Marker'] === 'Numbered' || c['Marker'] === '')
+              number: c['Marker'] === 'Numbered'
                 ? chapterCount
                 : (c['Marker'] === 'Plain'
                   ? ''
