@@ -10,6 +10,7 @@ var constants = {
 	_githubRepo: 'Author GitHub Repo Link',
 	// Map Settings
 	_tileProvider: 'Basemap Tiles',
+  _tileProviderApiKey: 'Basemap Tiles API Key',
 	_zoomControls: 'Zoom Controls',
   _narrativeWidth: 'Narrative Width',
   _imgContainerHeight: 'Media Container Height',
