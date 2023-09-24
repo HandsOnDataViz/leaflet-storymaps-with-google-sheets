@@ -449,7 +449,7 @@ $(window).on('load', function() {
     $('div#container0').addClass("in-focus");
     $('div#contents').animate({scrollTop: '1px'});
 
-    // On first load, check hash and if it contains an number, scroll down
+    // On first load, check hash and if it contains a number, scroll down
     if (parseInt(location.hash.substr(1))) {
       var containerId = parseInt( location.hash.substr(1) ) - 1;
       $('#contents').animate({
