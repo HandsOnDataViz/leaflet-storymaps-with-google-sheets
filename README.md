@@ -56,7 +56,7 @@ We use [Google Sheets API version 4](https://developers.google.com/sheets/api), 
 - jQuery v3.5.1 https://code.jquery.com (MIT)
 - PapaParse v5.3.0 to parse CSV with JavaScript (MIT)
 - Font Awesome v5.8.1 https://cdn.fontawesome.com (MIT, SIL OFL 1.1)
-- leaflet-providers (v1.10.2) https://github.com/leaflet-extras/leaflet-providers (BSD-2-Clause)
+- leaflet-providers (v4.0.0) https://github.com/leaflet-extras/leaflet-providers (BSD-2-Clause)
 - Leaflet.awesome-markers (v2.0.4), manually updated to svg to allow hex and material icons https://github.com/sigma-geosistemas/Leaflet.awesome-markers (MIT)
 - Leaflet.ExtraMarkers (v1.0.5) https://github.com/coryasilva/Leaflet.ExtraMarkers (MIT)
 - jQuery-CSV (v1.0.11) https://github.com/evanplaice/jquery-csv (MIT)
