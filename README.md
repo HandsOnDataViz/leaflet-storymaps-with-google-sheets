@@ -25,6 +25,9 @@ To geocode (find latitude and longitude coordinates), we recommend installing th
 
 See more in the tutorial https://handsondataviz.org/leaflet-storymaps-with-google-sheets.html
 
+## Update your code to address CARTO API KEY issues after September 2026
+If you used our code to create a map prior to September 2026, you may need to update your version to address a CARTO API KEY MISSING issue that prevents basemap tiles from displaying. See details in the [Get Your CARTO Basemaps API Key](https://handsondataviz.org/carto-basemaps-api-key.html) section of our book.
+
 ## Update your code for any pre-October 2020 storymaps before January 2021
 If you used our code to create a storymap prior to October 2020, you will need to update your version before January 26, 2021 for it to continue to work. Google announced that it will [migrate from Google Sheets API v3 to v4 in Jan 2021](https://developers.google.com/sheets/api/v3), and we released our update of Leaflet storymaps code v1.2 on September 29th to address Google's changes.
 
